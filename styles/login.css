@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    color: white;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding-top: 5rem;
+    height: 100vh;
+    overflow: hidden;
+
+	background: linear-gradient(-45deg, #15406c, #4a085b, #450b9d);
+	background-size: 400% 400%;
+	animation: gradient 7s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #21212185;
+    border-radius: 1.5rem;
+    padding: 3rem;
+    width: 300px;
+    box-shadow: 0 2px 10px rgba(79, 79, 79, 0.2)
+}
+label {
+    color: lightgray;
+}
+input[type=text], input[type=email], input[type=password] {
+    background-color:rgba(80, 80, 80, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border-right: none;
+}
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+    outline: none;
+    border: 2.5px solid rgb(111, 0, 180);
+    background-color: rgba(100, 100, 100, 0.8);
+}
+::placeholder {
+    color: darkgray;
+    opacity: 1; /* Firefox */
+  }
+button[type=submit] {
+    background-color: rgb(0,0,180);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    color: lightgray;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 2px 7px rgba(0, 0, 180, 0.7)
+}
+button[type=submit]:hover {
+    background-color: darkblue;
+}
+.error {
+    color: red;
+    font-weight: bold;
+}

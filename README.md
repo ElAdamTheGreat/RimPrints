@@ -5,5 +5,6 @@ An official repository of my semester project.
 frontend - all pages
 filters - index
 modals
+responsivity
 user login - login (all pages - nav)
 db + backend
