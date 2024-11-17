@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'RimWorldFont';
+    src: url('../lib/RimWorldFont.woff') format('woff');
+}  
+
+body {
+    background-color: #041D26;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    backdrop-filter: blur(8px);
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-title {
+    font-family: 'RimWorldFont';
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-sm {
+    font-size: 1rem;
+    padding: 8px 56px;
+    color: white;
+    background-color: #6A512E;
+    border-top: 5px solid #7D6133;
+    border-right: 5px solid #7D6133;
+    border-bottom: 5px solid #4F3D22;
+    border-left: 5px solid #4F3D22;
+}
+.btn-sm:hover {
+    background-color: #886432;
+    border-top: 5px solid #967036;
+    border-right: 5px solid #967036;
+    border-bottom: 5px solid #664B25;
+    border-left: 5px solid #664B25;
+    cursor: pointer;
+}
+.btn-sm:active {
+    background-color: #664B25;
+    border-top: 5px solid #584223;
+    border-right: 5px solid #584223;
+    border-bottom: 5px solid #6D5636;
+    border-left: 5px solid #6D5636;
+    cursor: pointer;
+}
+
+.alert {
+    display: none;
+    border: 5px solid red;
+    background-color: 5px solid lightcoral;
+}
