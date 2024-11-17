@@ -68,6 +68,10 @@ body {
     cursor: pointer;
 }
 
+.low-key {
+    color: #D3D3D3;
+}
+
 .alert {
     display: none;
     border: 5px solid red;
