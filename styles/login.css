@@ -6,14 +6,23 @@ body {
     font-family: 'Poppins', sans-serif;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
-    padding-top: 5rem;
     height: 100vh;
     overflow: hidden;
 
 	background: linear-gradient(-45deg, #15406c, #4a085b, #450b9d);
 	background-size: 400% 400%;
 	animation: gradient 7s ease infinite;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
 }
 
 @keyframes gradient {
@@ -27,10 +36,10 @@ body {
 		background-position: 0% 50%;
 	}
 }
-h1 {
+h3 {
     font-size: 2.5rem;
-    font-weight: bold;
     text-align: center;
+    margin: 0;
 }
 form {
     display: flex;
@@ -38,7 +47,7 @@ form {
     gap: 0.5rem;
     background-color: #21212185;
     border-radius: 1.5rem;
-    padding: 3rem;
+    padding: 2rem;
     width: 300px;
     box-shadow: 0 2px 10px rgba(79, 79, 79, 0.2)
 }
@@ -60,8 +69,10 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
 ::placeholder {
     color: darkgray;
     opacity: 1; /* Firefox */
-  }
-button[type=submit] {
+}
+
+
+.button-submit {
     background-color: rgb(0,0,180);
     padding: 0.5rem;
     border-radius: 8px;
@@ -72,10 +83,14 @@ button[type=submit] {
     font-weight: bold;
     box-shadow: 0 2px 7px rgba(0, 0, 180, 0.7)
 }
-button[type=submit]:hover {
+.button-submit:hover {
     background-color: darkblue;
 }
+
+
+
 .error {
+    display: none;
     color: red;
     font-weight: bold;
 }
