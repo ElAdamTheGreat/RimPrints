@@ -7,9 +7,10 @@ $isSignedIn = false;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/login.css">
-    <title>Sign up</title>
+    <title>Sign up - RimPrints</title>
 </head>
 <body>
     <nav class="nav">
@@ -24,20 +25,24 @@ $isSignedIn = false;
         </div>
     </nav>
     <div class="content">
-        <h3>Sign up to RimPrints</h3>
         <form id="registration-form">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-            
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email">
-            
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+            <h3>Sign up to RimPrints</h3>
+            <div class="form-sec">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-input">
+            </div>
+            <div class="form-sec">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-input">
+            </div>
+            <div class="form-sec">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-input">
+            </div>
             
             <span class="error">Error: Something went wrong.</span>
             
-            <button type="submit" class="btn-sm">Odeslat</button>
+            <button type="submit" class="btn-sm">Sign Up</button>
         </form>
     </div>
 </body>

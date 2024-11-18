@@ -37,38 +37,37 @@ body {
 	}
 }
 h3 {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
+    font-weight: 500;
     text-align: center;
     margin: 0;
 }
 form {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    background-color: #21212185;
-    border-radius: 1.5rem;
+    gap: 1rem;
+    background-color: #15191d;
+    border: 1px solid #616c7a;
     padding: 2rem;
     width: 300px;
     box-shadow: 0 2px 10px rgba(79, 79, 79, 0.2)
 }
+.form-sec {
+    display: flex;
+    flex-direction: column;
+}
 label {
     color: lightgray;
 }
-input[type=text], input[type=email], input[type=password] {
-    background-color:rgba(80, 80, 80, 0.8);
+.form-input {
+    background-color:rgba(0, 0, 0, 0.2);
     color: white;
     padding: 0.5rem;
     border-radius: 8px;
-    border-right: none;
+    border: 1px solid #616c7a;
 }
-input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+.form-input:focus {
     outline: none;
-    border: 2.5px solid rgb(111, 0, 180);
-    background-color: rgba(100, 100, 100, 0.8);
-}
-::placeholder {
-    color: darkgray;
-    opacity: 1; /* Firefox */
 }
 
 
@@ -94,3 +93,4 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
     color: red;
     font-weight: bold;
 }
+
