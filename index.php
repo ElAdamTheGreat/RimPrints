@@ -27,7 +27,7 @@ $isSignedIn = false;
     <div class="content">
         <div class="heading">
             <h1>Community blueprints</h1>
-            <button class="btn-sm">Upload</button>
+            <button class="btn-sm" id="modal-open">Upload</button>
         </div>
         <div class="printgrid">
             <?php
@@ -50,5 +50,14 @@ $isSignedIn = false;
             <p>How do I upload?</p>
         </div>
     </div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Modal Title</h2>
+            <p>This is a modal.</p>
+            <button class="btn-sm" id="modal-close">Close</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
