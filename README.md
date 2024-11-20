@@ -7,7 +7,7 @@ An official repository of my semester project.
 # ToDo
 - frontend - all pages
 - filters - index
-- modals
+- ~~modals~~
 - responsivity
 - user login - login (all pages - nav)
 - db + backend 
