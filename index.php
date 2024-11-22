@@ -38,7 +38,7 @@ $isSignedIn = false;
                     <h2>Blueprint ' . $i . '</h2>
                     <div class="cardinfo">
                         <p class="low-key">Author name</p>
-                        <p>15</p>
+                        <p>X upvotes</p>
                     </div>
                 </div>';
             }
