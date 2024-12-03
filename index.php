@@ -10,6 +10,7 @@ $isSignedIn = false;
     <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/index.css">
+    <script src="js/script.js" defer></script>
     <title>RimPrints</title>
 </head>
 <body>
@@ -57,7 +58,5 @@ $isSignedIn = false;
             <button class="btn-sm" id="modal-close">Close</button>
         </div>
     </div>
-
-    <script src="js/script.js"></script>
 </body>
 </html>
