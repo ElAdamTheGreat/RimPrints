@@ -51,6 +51,7 @@ body {
     border-right: 5px solid #7D6133;
     border-bottom: 5px solid #4F3D22;
     border-left: 5px solid #4F3D22;
+    text-decoration: none;
 }
 .btn-sm:hover {
     background-color: #886432;

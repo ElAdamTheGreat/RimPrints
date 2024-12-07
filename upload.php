@@ -27,18 +27,25 @@ $isSignedIn = false;
     <div class="content">
         <h1>Upload Blueprint</h1>
         <form action="upload.php" class="form" method="post" enctype="multipart/form-data">
-            <div class="form-data">
-                <div class="form-sec">
-                    <label for="title" class="h3">Blueprint title</label>
-                    <input type="text" class="form-input" id="title" name="title" required>
+            <div class="form-section">
+                <div class="form-data">
+                    <div class="form-sec">
+                        <label for="title" class="h3">Blueprint title</label>
+                        <input type="text" class="form-input" id="title" name="title" required>
+                    </div>
+                    <div class="form-sec">
+                        <label for="title" class="h3">Description</label>
+                        <textarea class="form-input" id="description" name="description" rows="5" required></textarea>
+                    </div>
+                    <input type="file" class="file" name="file" id="file" accept=".xml" required>
                 </div>
-                <input type="file" name="file" id="file" accept=".xml" required>
-                <input type="submit" class="btn-sm" value="Upload">
+                <div class="vert-line"></div>
+                <div class="form-picture">
+                    <img src="https://placehold.co/300" alt="placeholder">
+                    <input type="file" class="file" name="pic" id="pic" accept="image/png, image/jpeg">
+                </div>
             </div>
-            <div class="vert-line"></div>
-            <div class="form-picture">
-                <img src="https://placehold.co/300" alt="placeholder">
-            </div>
+            <input type="submit" class="btn-sm" value="Upload">
         </form>
     </div>
 </body>
