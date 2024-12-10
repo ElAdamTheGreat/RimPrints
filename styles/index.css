@@ -27,6 +27,8 @@
     background-color: #6D5636;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transition: 0.4s;
+    text-decoration: none;
+    color: inherit;
 }
 .card:hover {
     background-color: #7D6133;

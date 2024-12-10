@@ -28,20 +28,20 @@ $isSignedIn = false;
     <div class="content">
         <div class="heading">
             <h1>Community blueprints</h1>
-            <button class="btn-sm" id="modal-open">Upload</button>
+            <a href="upload.php" class="btn-sm">Upload</a>
         </div>
         <div class="printgrid">
             <?php
             for ($i = 1; $i <= 30; $i++) {
                 echo '
-                <div class="card">
+                <a href="print.php" class="card">
                     <img src="https://placehold.co/300" alt="placeholder">
                     <h2>Blueprint ' . $i . '</h2>
                     <div class="cardinfo">
                         <p class="low-key">Author name</p>
                         <p>X upvotes</p>
                     </div>
-                </div>';
+                </a>';
             }
             ?>
         </div>
