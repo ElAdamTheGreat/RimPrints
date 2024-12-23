@@ -1,34 +1,16 @@
 <?php
-$isSignedIn = false;
+session_start();
+$isSignedIn = $_SESSION['isSignedIn'] ?? false;
+
+include('server/queries.php');
+$print = getPrintById(1);
 
 //print data
-$id = 1;
-$title = "Blueprint 1";
-$desc = "Lorem Ipsum loremeeeeem";
 $img = "https://placehold.co/300"; 
-$content = ""; 
-$createdAt = new DateTime("2024-12-10 15:39:00");
-$updatedAt = "2020-01-01 00:00:00";
-$userId = 1;
 
-//user taht created this
-$username = "username";
-
-$currentDate = new DateTime();
-$interval = $currentDate->diff($createdAt);
-if ($interval->y > 0) {
-    $relativeTime = $interval->y . " years ago";
-} else if ($interval->m > 0) {
-    $relativeTime = $interval->m . " months ago";
-} else if ($interval->d > 0) {
-    $relativeTime = $interval->d . " days ago";
-} else if ($interval->h > 0) {
-    $relativeTime = $interval->h . " hours ago";
-} else if ($interval->i > 0) {
-    $relativeTime = $interval->i . " minutes ago";
-} else {
-    $relativeTime = "Just now";
-}
+include('functions/relativeTime.php');
+$relCreatedAt = relativeTime(new DateTime($print->createdAt));
+$relUpdatedAt = relativeTime(new DateTime($print->updatedAt));
 
 ?>
 
@@ -41,7 +23,7 @@ if ($interval->y > 0) {
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/print.css">
     <script src="js/script.js" defer></script>
-    <title><?php echo $title ?> - RimPrints</title>
+    <title><?php echo $print->title ?> - RimPrints</title>
 </head>
 <body>
 <nav class="nav">
@@ -62,9 +44,9 @@ if ($interval->y > 0) {
         <div class="vert-line"></div>
         <div class="section">
             <div class="data">
-                <h1><?php echo $title ?></h1>
-                <p class="low-key"><?php echo $username ." · ". $relativeTime ?>  </p>
-                <p><?php echo $desc ?></p>
+                <h1><?php echo $print->title ?></h1>
+                <p class="low-key"><?php echo $print->user->username ." · ". $relCreatedAt ?>  </p>
+                <p><?php echo $print->desc ?></p>
             </div>
             <button class="btn-sm">Download print</button>
         </div>

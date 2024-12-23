@@ -1,5 +1,10 @@
 <?php
-$isSignedIn = false;
+session_start();
+$isSignedIn = $_SESSION['isSignedIn'] ?? false;
+
+include('server/queries.php');
+$prints = getAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -31,19 +36,16 @@ $isSignedIn = false;
             <a href="upload.php" class="btn-sm">Upload</a>
         </div>
         <div class="printgrid">
-            <?php
-            for ($i = 1; $i <= 30; $i++) {
-                echo '
+            <?php foreach ($prints as $print) { ?>
                 <a href="print.php" class="card">
                     <img src="https://placehold.co/300" alt="placeholder">
-                    <h2>Blueprint ' . $i . '</h2>
+                    <h2><?php echo $print->title ?></h2>
                     <div class="cardinfo">
-                        <p class="low-key">Author name</p>
-                        <p>X upvotes</p>
+                        <p class="low-key">by <?php echo $print -> user -> username ?></p>
+                        <p>WIP</p>
                     </div>
-                </a>';
-            }
-            ?>
+                </a>
+            <?php } ?>
         </div>
 
 
