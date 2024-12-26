@@ -1,10 +1,26 @@
 <?php
 session_start();
-$isSignedIn = $_SESSION['isSignedIn'] ?? false;
+$_SESSION['isSignedIn'] = false;
 
 include('server/queries.php');
-$prints = getAll();
+include('components/loader/loader.php');
 
+if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
+    $prints = getAll();
+
+    header('Content-Type: application/json');
+    $response = [];
+    foreach ($prints as $print) {
+        $response[] = [
+            'id' => $print->id,
+            'title' => $print->title,
+            'img' => "https://placehold.co/300",
+            'username' => $print->user->username,
+        ];
+    }
+    echo json_encode($response);
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +31,7 @@ $prints = getAll();
     <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/index.css">
-    <script src="js/script.js" defer></script>
+    <script src="js/index.js" defer></script>
     <title>RimPrints</title>
 </head>
 <body>
@@ -23,7 +39,7 @@ $prints = getAll();
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <a href="">Library</a>
-            <?php if ($isSignedIn) { ?>
+            <?php if ($_SESSION['isSignedIn']) { ?>
                 <a href="">Account</a>
             <?php } else { ?>
                 <a href="login.php">Log in</a>
@@ -35,19 +51,13 @@ $prints = getAll();
             <h1>Community blueprints</h1>
             <a href="upload.php" class="btn-sm">Upload</a>
         </div>
-        <div class="printgrid">
-            <?php foreach ($prints as $print) { ?>
-                <a href="print.php" class="card">
-                    <img src="https://placehold.co/300" alt="placeholder">
-                    <h2><?php echo $print->title ?></h2>
-                    <div class="cardinfo">
-                        <p class="low-key">by <?php echo $print -> user -> username ?></p>
-                        <p>WIP</p>
-                    </div>
-                </a>
-            <?php } ?>
-        </div>
 
+        <div class="data" id="data">
+            <div class="center col">
+                <?php loader() ?>
+                <h3>Loading data...</h3>
+            </div>
+        </div>
 
         <div class="alert">
             <p>How do I upload?</p>

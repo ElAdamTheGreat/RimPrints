@@ -74,6 +74,17 @@ body {
     color: #D3D3D3;
 }
 
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .alert {
     display: none;
     border: 5px solid red;

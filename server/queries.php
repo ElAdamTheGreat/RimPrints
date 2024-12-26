@@ -17,13 +17,13 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // get queries (read)
 function getAll(): array {
     global $pdo;
-    $query = $pdo->query('SELECT p.*, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id;');
+    $query = $pdo->query('SELECT p.id, p.title, p.img, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id;');
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
     $prints = [];
     foreach ($results as $row) {
         $user = new UserModel($row['user_id'], $row['user_username']);
-        $prints[] = new PrintModel($row['id'], $row['title'], $row['desc'], $row['img'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
+        $prints[] = new MiniPrintModel($row['id'], $row['title'], $row['img'], $user);
     }
     return $prints;
 }

@@ -1,6 +1,7 @@
 <?php   
-function relativeTime(DateTime $date): string {
+function relativeTime(string $dateString): string {
     $currentDate = new DateTime();
+    $date = new DateTime($dateString);
     $interval = $currentDate->diff($date);
     if ($interval->y > 0) {
         $relativeTime = $interval->y . " years ago";

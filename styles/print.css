@@ -11,6 +11,12 @@
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+    width: 400px;
+}
+.picture img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
 }
 .vert-line {
     align-self: stretch;

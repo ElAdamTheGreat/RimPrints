@@ -31,5 +31,18 @@ class PrintModel {
     }
 }
 
+class MiniPrintModel {
+    public $id;
+    public $title;
+    public $img;
+    public $user;
+
+    public function __construct($id, $title, $img, $user) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->img = $img;
+        $this->user = $user;
+    }
+}
 
 ?>
