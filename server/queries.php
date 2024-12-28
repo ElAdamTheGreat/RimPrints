@@ -55,22 +55,23 @@ function getPrintsByUserId($userId): array {
     return $prints;
 }
 
-// Create, update, delete queries
-function createPrint($title, $desc, $img, $content, $user_id): void {
+// Create, update, delete queries<?php
+function createPrint($title, $desc, $img, $content, $user_id): int {
     global $pdo;
-    $query = $pdo->prepare("INSERT INTO rimprints_Print (title, desc, img, content, user_id) VALUES (:title, :desc, :img, :content, :user_id);");
+    $query = $pdo->prepare('INSERT INTO "rimprints_Print" (title, "desc", img, content, "userId", "createdAt", "updatedAt") VALUES (:title, :desc, :img, :content, :user_id, NOW(), NOW());');
     $query->execute(['title' => $title, 'desc' => $desc, 'img' => $img, 'content' => $content, 'user_id' => $user_id]);
+    return (int)$pdo->lastInsertId();
 }
 
 function updatePrint($id, $title, $desc, $img, $content): void {
     global $pdo;
-    $query = $pdo->prepare("UPDATE rimprints_Print SET title = :title, desc = :desc, img = :img, content = :content WHERE id = :id;");
+    $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, desc = :desc, img = :img, content = :content WHERE id = :id;');
     $query->execute(['id' => $id, 'title' => $title, 'desc' => $desc, 'img' => $img, 'content' => $content]);
 }
 
 function deletePrint($id): void {
     global $pdo;
-    $query = $pdo->prepare("DELETE FROM rimprints_Print WHERE id = :id;");
+    $query = $pdo->prepare('DELETE FROM "rimprints_Print" WHERE id = :id;');
     $query->execute(['id' => $id]);
 }
 
@@ -78,13 +79,13 @@ function deletePrint($id): void {
 // User queries
 function createUser($username, $password): void {
     global $pdo;
-    $query = $pdo->prepare("INSERT INTO rimprints_User (username, password) VALUES (:username, :password);");
+    $query = $pdo->prepare('INSERT INTO "rimprints_User" (username, password) VALUES (:username, :password);');
     $query->execute(['username' => $username, 'password' => $password]);
 }
 
 function loginUser($username, $password): bool {
     global $pdo;
-    $query = $pdo->prepare('SELECT * FROM rimprints_User WHERE username = :username AND password = :password;');
+    $query = $pdo->prepare('SELECT * FROM "rimprints_User" WHERE username = :username AND password = :password;');
     $query->execute(['username' => $username, 'password' => $password]);
     $row = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -93,7 +94,7 @@ function loginUser($username, $password): bool {
 
 function getUserByUsername($username): UserModel|null {
     global $pdo;
-    $query = $pdo->prepare('SELECT * FROM rimprints_User WHERE username = :username;');
+    $query = $pdo->prepare('SELECT * FROM "rimprints_User" WHERE username = :username;');
     $query->execute(['username' => $username]);
     $row = $query->fetch(PDO::FETCH_ASSOC);
 

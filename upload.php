@@ -1,5 +1,28 @@
 <?php
-$isSignedIn = false;
+session_start();
+$isSignedIn = $_SESSION['isSignedIn'] ?? false;
+
+include('server/queries.php');
+include('components/loader/loader.php');
+
+if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
+    $title = $_POST['title'];
+    $desc = $_POST['desc'];
+    $xmlContent = $_POST['xmlContent'];
+    $img = $_FILES['pic']['name'];
+    $userId = $_SESSION['userId'] ?? 1; // Replace with actual user ID from session
+
+    $newPrintId = createPrint($title, $desc, 1, $xmlContent, $userId);
+    header('Content-Type: application/json');
+    echo json_encode(['id' => $newPrintId]);
+
+    // Save the image file
+    $imgExtension = pathinfo($img, PATHINFO_EXTENSION);
+    $newImgName = $newPrintId . '.' . $imgExtension;
+    move_uploaded_file($_FILES['pic']['tmp_name'], "lib/img/" . $newImgName);
+
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +33,7 @@ $isSignedIn = false;
     <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/upload.css">
+    <script src="js/upload.js" defer></script>
     <title>Upload Blueprint - RimPrints</title>
 </head>
 <body>
@@ -24,9 +48,9 @@ $isSignedIn = false;
             <?php } ?>
         </div>
     </nav>
-    <div class="content">
+    <div class="content" id="content">
         <h1>Upload Blueprint</h1>
-        <form action="upload.php" class="form" method="post" enctype="multipart/form-data">
+        <form id="upload-form" class="form" method="post" enctype="multipart/form-data">
             <div class="form-section">
                 <div class="form-data">
                     <div class="form-sec">
@@ -34,8 +58,8 @@ $isSignedIn = false;
                         <input type="text" class="form-input" id="title" name="title" required>
                     </div>
                     <div class="form-sec">
-                        <label for="title" class="h3">Description</label>
-                        <textarea class="form-input" id="description" name="description" rows="5" required></textarea>
+                        <label for="desc" class="h3">Description</label>
+                        <textarea class="form-input" id="desc" name="desc" rows="5" required></textarea>
                     </div>
                     <input type="file" class="file" name="file" id="file" accept=".xml" required>
                 </div>
@@ -45,7 +69,7 @@ $isSignedIn = false;
                     <input type="file" class="file" name="pic" id="pic" accept="image/png, image/jpeg">
                 </div>
             </div>
-            <input type="submit" class="btn-sm" value="Upload">
+            <button type="submit" class="btn-sm" id="submit">Upload</button>
         </form>
     </div>
 </body>

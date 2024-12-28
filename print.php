@@ -6,6 +6,7 @@ $printId = $_GET['id'] ?? null;
 
 include('server/queries.php');
 include('components/loader/loader.php');
+include('functions/relativeTime.php');
 
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $print = getPrintById($printId);
@@ -17,6 +18,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         'title' => $print->title,
         'img' => "https://placehold.co/300",
         'relCreatedAt' => $relCreatedAt,
+        //'createdAt' => $print->createdAt,
         'relUpdatedAt' => $relUpdatedAt,
         'username' => $print->user->username,
         'desc' => $print->desc
@@ -38,7 +40,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         const printId = '<?php echo $printId; ?>';
     </script>
     <script src="js/print.js" defer></script>
-
     <title><?php echo $print->title ?> - RimPrints</title>
 </head>
 <body>

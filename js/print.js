@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <button class="btn-sm">Download print</button>
             </div>
         `;
+        //console.log(data.createdAt)
     })
     .catch(error => {
         document.getElementById('content').innerHTML = `
