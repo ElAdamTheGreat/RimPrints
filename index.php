@@ -39,10 +39,10 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <a href="">Library</a>
-            <?php if ($_SESSION['isSignedIn']) { ?>
+            <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
                 <a href="">Account</a>
             <?php } else { ?>
-                <a href="login.php">Log in</a>
+                <a href="signin.php">Sign in</a>
             <?php } ?>
         </div>
     </nav>

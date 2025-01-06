@@ -22,7 +22,7 @@ function getAll(): array {
 
     $prints = [];
     foreach ($results as $row) {
-        $user = new UserModel($row['user_id'], $row['user_username']);
+        $user = new MiniUserModel($row['user_id'], $row['user_username']);
         $prints[] = new MiniPrintModel($row['id'], $row['title'], $row['img'], $user);
     }
     return $prints;
@@ -35,7 +35,7 @@ function getPrintById($id): PrintModel|null {
     $row = $query->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
-        $user = new UserModel($row['user_id'], $row['user_username']);
+        $user = new MiniUserModel($row['user_id'], $row['user_username']);
         return new PrintModel($row['id'], $row['title'], $row['desc'], $row['img'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
     }
     return null;
@@ -49,7 +49,7 @@ function getPrintsByUserId($userId): array {
 
     $prints = [];
     foreach ($results as $row) {
-        $user = new UserModel($row['user_id'], $row['user_username']);
+        $user = new MiniUserModel($row['user_id'], $row['user_username']);
         $prints[] = new PrintModel($row['id'], $row['title'], $row['desc'], $row['img'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
     }
     return $prints;
@@ -77,30 +77,62 @@ function deletePrint($id): void {
 
 
 // User queries
-function createUser($username, $password): void {
+function createUser($username, $email, $password): void {
     global $pdo;
-    $query = $pdo->prepare('INSERT INTO "rimprints_User" (username, password) VALUES (:username, :password);');
-    $query->execute(['username' => $username, 'password' => $password]);
+    $query = $pdo->prepare('INSERT INTO "rimprints_User" (username, password) VALUES (:username, :email, :password);');
+    $query->execute(['username' => $username, 'email' => $email, 'password' => $password]);
+}
+function checkUserPass($username = null, $email = null): string|null  {
+    global $pdo;
+    $conditions = [];
+    $params = [];
+
+    if ($username !== null) {
+        $conditions[] = 'username = :username';
+        $params['username'] = $username;
+    }
+
+    if ($email !== null) {
+        $conditions[] = 'email = :email';
+        $params['email'] = $email;
+    }
+
+    if (empty($conditions)) {
+        return null; // No conditions provided
+    }
+
+    $query = $pdo->prepare('SELECT "password" FROM "rimprints_User" WHERE ' . implode(' OR ', $conditions) . ';');
+    $query->execute($params);
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+    return $result ? $result['password'] : null;
 }
 
-function loginUser($username, $password): bool {
+function getUserByUsermail($username = null, $email = null): UserModel|null {
     global $pdo;
-    $query = $pdo->prepare('SELECT * FROM "rimprints_User" WHERE username = :username AND password = :password;');
-    $query->execute(['username' => $username, 'password' => $password]);
-    $row = $query->fetch(PDO::FETCH_ASSOC);
+    $conditions = [];
+    $params = [];
 
-    return $row !== false;
-}
+    if ($username !== null) {
+        $conditions[] = 'u.username = :username';
+        $params[':username'] = $username;
+    }
 
-function getUserByUsername($username): UserModel|null {
-    global $pdo;
-    $query = $pdo->prepare('SELECT * FROM "rimprints_User" WHERE username = :username;');
-    $query->execute(['username' => $username]);
-    $row = $query->fetch(PDO::FETCH_ASSOC);
+    if ($email !== null) {
+        $conditions[] = 'u.email = :email';
+        $params[':email'] = $email;
+    }
 
+    if (empty($conditions)) {
+        return null; // No conditions provided
+    }
+
+    $query = $pdo->prepare('SELECT u.id, u.username, u.email, u.role, COUNT(p.id) AS prints FROM "rimprints_User" u LEFT JOIN "rimprints_Print" p ON u.id = p."userId" WHERE ' . implode(' OR ', $conditions) . ' GROUP BY u.id, u.username, u.email, u.role;');
+    $query->execute($params);
+    $row = $query->fetch(mode: PDO::FETCH_ASSOC);
+    
     if ($row) {
-        return new UserModel($row['id'], $row['username']);
+        return new UserModel($row['id'], $row['username'], $row['email'], $row['role'], $row['prints']);
     }
     return null;
 }
-?>
+

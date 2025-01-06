@@ -70,6 +70,17 @@ body {
     cursor: pointer;
 }
 
+.link {
+    color: #4493F8;
+    text-decoration: none;
+}
+.link:hover {
+    text-decoration: underline;
+}
+.link:active {
+    color: #4493F8;
+}
+
 .low-key {
     color: #D3D3D3;
 }

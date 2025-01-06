@@ -12,18 +12,21 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - ~~Print display by id in URL~~
 - Upload
     - ~~mplementation~~
+    - fix css
     - check date datatype and why doesnt it have time included
+    - make picture preview and actually display it
 - Delete print
 - User login + signup
-    - $_SESSION login
+    - ~~$_SESSION login~~
     - fix uploading to show correct userId
-- Edit print
-- Print image
+- Edit print (as OP or admin)
 - User profile
 - Library
+- Account details
+- paging - index
 - frontend finalization- all pages
 - responsivity
+- documentation
 ## ToDo Extra
 - filters - index
-- paging - index
 

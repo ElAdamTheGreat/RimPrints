@@ -2,6 +2,22 @@
 class UserModel {
     public $id;
     public $username;
+    public $email;
+    public $role;
+    public $prints;
+
+    public function __construct($id, $username, $email, $role, $prints) {
+        $this->id = $id;
+        $this->username = $username;
+        $this->email = $email;
+        $this->role = $role;
+        $this->prints = $prints;
+    }
+}
+
+class MiniUserModel {
+    public $id;
+    public $username;
 
     public function __construct($id, $username) {
         $this->id = $id;

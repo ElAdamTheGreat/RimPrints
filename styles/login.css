@@ -70,26 +70,13 @@ label {
     outline: none;
 }
 
-
-.button-submit {
-    background-color: rgb(0,0,180);
-    padding: 0.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-    color: lightgray;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 2px 7px rgba(0, 0, 180, 0.7)
+.status {
+    width: 100%;
+    display: flex;
+    justify-content: center
 }
-.button-submit:hover {
-    background-color: darkblue;
-}
-
-
 
 .error {
-    display: none;
     color: red;
     font-weight: bold;
 }
