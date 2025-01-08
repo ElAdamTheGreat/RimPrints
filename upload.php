@@ -1,6 +1,10 @@
 <?php
 session_start();
-$isSignedIn = $_SESSION['isSignedIn'] ?? false;
+// is user not signed in?
+if (!($_SESSION['isSignedIn'] ?? false)) {
+    header('Location: index.php');
+    exit;
+}
 
 include('server/queries.php');
 include('components/loader/loader.php');
@@ -10,9 +14,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $desc = $_POST['desc'];
     $xmlContent = $_POST['xmlContent'];
     $img = $_FILES['pic']['name'];
-    $userId = $_SESSION['userId'] ?? 1; // Replace with actual user ID from session
+    $userId = $_SESSION['userId'] ?? 1;
 
-    $newPrintId = createPrint($title, $desc, 1, $xmlContent, $userId);
+    $newPrintId = createPrint($title, $desc, $xmlContent, $userId);
     header('Content-Type: application/json');
     echo json_encode(['id' => $newPrintId]);
 
@@ -42,7 +46,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         <div class="nav-links">
             <a href="">Library</a>
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href="">Account</a>
+                <a href=""><?php echo $_SESSION['username'] ?></a>
+                <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
                 <a href="signin.php">Sign in</a>
             <?php } ?>
@@ -59,13 +64,17 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                     </div>
                     <div class="form-sec">
                         <label for="desc" class="h3">Description</label>
-                        <textarea class="form-input" id="desc" name="desc" rows="5" required></textarea>
+                        <textarea class="form-input" id="desc" name="desc" rows="10" required></textarea>
                     </div>
-                    <input type="file" class="file" name="file" id="file" accept=".xml" required>
+                    <div class="form-sec">
+                        <label for="file" class="h3">Blueprint file (.xml)</label>
+                        <input type="file" class="file" name="file" id="file" accept=".xml" required>
+                    </div>
                 </div>
                 <div class="vert-line"></div>
                 <div class="form-picture">
-                    <img src="https://placehold.co/300" alt="placeholder">
+                    <label for="pic" class="h3">Blueprint picture</label>
+                    <img src="https://placehold.co/300" alt="preview" id="preview" width="300">
                     <input type="file" class="file" name="pic" id="pic" accept="image/png, image/jpeg">
                 </div>
             </div>

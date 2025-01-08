@@ -9,8 +9,9 @@
 
 .form {
     display: flex;
+    flex-direction: column;
     gap: 2rem;
-    background-color: #0E1626;
+    background-color: #44351c;
     padding: 3rem;
     border-radius: 20px;
 }

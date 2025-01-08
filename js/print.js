@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         document.getElementById('content').innerHTML = `
             <div class="picture">
-                <img src="${data.img}" alt="${data.title}">
+                <img src="${data.img}" alt="${data.title} image">
             </div>
             <div class="vert-line"></div>
             <div class="section">

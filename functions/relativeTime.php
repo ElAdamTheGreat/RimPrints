@@ -4,15 +4,35 @@ function relativeTime(string $dateString): string {
     $date = new DateTime($dateString);
     $interval = $currentDate->diff($date);
     if ($interval->y > 0) {
-        $relativeTime = $interval->y . " years ago";
+        if ($interval->y == 1) {
+            return "a year ago";
+        } else {
+            return $interval->y . " years ago";
+        }
     } else if ($interval->m > 0) {
-        $relativeTime = $interval->m . " months ago";
+        if ($interval->m == 1) {
+            return "a month ago";
+        } else {
+            return $interval->m . " months ago";
+        }
     } else if ($interval->d > 0) {
-        $relativeTime = $interval->d . " days ago";
+        if ($interval->d == 1) {
+            return "a day ago";
+        } else {
+            return $interval->d . " days ago";
+        }
     } else if ($interval->h > 0) {
-        $relativeTime = $interval->h . " hours ago";
+        if ($interval->h == 1) {
+            return "an hour ago";
+        } else {
+            return $interval->h . " hours ago";
+        }
     } else if ($interval->i > 0) {
-        $relativeTime = $interval->i . " minutes ago";
+        if ($interval->i == 1) {
+            return "a minute ago";
+        } else {
+            return $interval->i . " minutes ago";
+        }
     } else {
         $relativeTime = "Just now";
     }

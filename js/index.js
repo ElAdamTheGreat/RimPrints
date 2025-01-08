@@ -1,6 +1,29 @@
+import Modal from './modal.js';
+
 document.addEventListener('DOMContentLoaded', function() {
-    const dataElement = document.getElementById('data');
-    
+    const dataElement = document.getElementById('data')
+    const uploadBtn = document.getElementById('upload-btn')
+    const modalUpload = new Modal('modal-open', 'modal1-close', 'modal-upload')
+    let isSignedIn
+    new Modal('signout-btn', 'modal2-close', 'modal-signout')
+
+    uploadBtn.addEventListener('click', function() {
+        fetch('server/session.php')
+        .then(response => response.json())
+        .then(data => {
+            isSignedIn = data.isSignedIn;
+
+            if (isSignedIn) {
+                console.log('User is signed in. Redirecting to upload page...');
+                window.location.href = 'upload.php';
+            } else {
+                console.log("Access denied.");
+                modalUpload.openModal();
+            }
+        });
+    });
+
+
     fetch(`index.php?ajax=1`)
     .then(response => response.json())
     .then(data => {
@@ -15,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             printCard.href = `print.php?id=${print.id}`;
             printCard.className = 'card';
             printCard.innerHTML = `
-                <img src="${print.img}" alt="placeholder">
+                <img src="${print.img}" alt="${print.title} image">
                 <h2>${print.title}</h2>
                 <div class="cardinfo">
                     <p class="low-key">by ${print.username}</p>

@@ -68,7 +68,7 @@ document.getElementById('registration-form').addEventListener('submit', function
                 console.log('Received user details:', data);
                 if (data.success) {
                     // Redirect to the previous page
-                    window.location.href = 'index.php';
+                    window.location.href = document.referrer || 'index.php';
                 } else {
                     content.textContent = data.error;
                 }

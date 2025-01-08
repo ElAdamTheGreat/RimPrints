@@ -17,13 +17,13 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // get queries (read)
 function getAll(): array {
     global $pdo;
-    $query = $pdo->query('SELECT p.id, p.title, p.img, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id;');
+    $query = $pdo->query('SELECT p.id, p.title, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id;');
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
     $prints = [];
     foreach ($results as $row) {
         $user = new MiniUserModel($row['user_id'], $row['user_username']);
-        $prints[] = new MiniPrintModel($row['id'], $row['title'], $row['img'], $user);
+        $prints[] = new MiniPrintModel($row['id'], $row['title'],  $user);
     }
     return $prints;
 }
@@ -36,7 +36,7 @@ function getPrintById($id): PrintModel|null {
 
     if ($row) {
         $user = new MiniUserModel($row['user_id'], $row['user_username']);
-        return new PrintModel($row['id'], $row['title'], $row['desc'], $row['img'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
+        return new PrintModel($row['id'], $row['title'], $row['desc'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
     }
     return null;
 }
@@ -50,23 +50,23 @@ function getPrintsByUserId($userId): array {
     $prints = [];
     foreach ($results as $row) {
         $user = new MiniUserModel($row['user_id'], $row['user_username']);
-        $prints[] = new PrintModel($row['id'], $row['title'], $row['desc'], $row['img'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
+        $prints[] = new PrintModel($row['id'], $row['title'], $row['desc'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
     }
     return $prints;
 }
 
-// Create, update, delete queries<?php
-function createPrint($title, $desc, $img, $content, $user_id): int {
+// Create, update, delete queries
+function createPrint(string $title, string $desc, string $content, int $user_id): int {
     global $pdo;
-    $query = $pdo->prepare('INSERT INTO "rimprints_Print" (title, "desc", img, content, "userId", "createdAt", "updatedAt") VALUES (:title, :desc, :img, :content, :user_id, NOW(), NOW());');
-    $query->execute(['title' => $title, 'desc' => $desc, 'img' => $img, 'content' => $content, 'user_id' => $user_id]);
+    $query = $pdo->prepare('INSERT INTO "rimprints_Print" (title, "desc", content, "userId", "createdAt", "updatedAt") VALUES (:title, :desc, :content, :user_id, NOW(), NOW());');
+    $query->execute(['title' => $title, 'desc' => $desc, 'content' => $content, 'user_id' => $user_id]);
     return (int)$pdo->lastInsertId();
 }
 
-function updatePrint($id, $title, $desc, $img, $content): void {
+function updatePrint($id, $title, $desc, $content): void {
     global $pdo;
-    $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, desc = :desc, img = :img, content = :content WHERE id = :id;');
-    $query->execute(['id' => $id, 'title' => $title, 'desc' => $desc, 'img' => $img, 'content' => $content]);
+    $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, desc = :desc, content = :content WHERE id = :id;');
+    $query->execute(['id' => $id, 'title' => $title, 'desc' => $desc, 'content' => $content]);
 }
 
 function deletePrint($id): void {

@@ -29,17 +29,15 @@ class PrintModel {
     public $id;
     public $title;
     public $desc;
-    public $img;
     public $content;
     public $createdAt;
     public $updatedAt;
     public $user;
 
-    public function __construct($id, $title, $desc, $img, $content, $createdAt, $updatedAt, $user) {
+    public function __construct($id, $title, $desc, $content, $createdAt, $updatedAt, $user) {
         $this->id = $id;
         $this->title = $title;
         $this->desc = $desc;
-        $this->img = $img;
         $this->content = $content;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
@@ -50,13 +48,11 @@ class PrintModel {
 class MiniPrintModel {
     public $id;
     public $title;
-    public $img;
     public $user;
 
-    public function __construct($id, $title, $img, $user) {
+    public function __construct($id, $title, $user) {
         $this->id = $id;
         $this->title = $title;
-        $this->img = $img;
         $this->user = $user;
     }
 }

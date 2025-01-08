@@ -7,16 +7,18 @@ $printId = $_GET['id'] ?? null;
 include('server/queries.php');
 include('components/loader/loader.php');
 include('functions/relativeTime.php');
+include('functions/getImagePath.php');
 
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $print = getPrintById($printId);
     $relCreatedAt = relativeTime($print->createdAt);
     $relUpdatedAt = relativeTime($print->updatedAt);
+    $imagePath = getImagePath($printId);
 
     header('Content-Type: application/json');
     echo json_encode([
         'title' => $print->title,
-        'img' => "https://placehold.co/300",
+        'img' => $imagePath,
         'relCreatedAt' => $relCreatedAt,
         //'createdAt' => $print->createdAt,
         'relUpdatedAt' => $relUpdatedAt,
@@ -43,12 +45,13 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <title><?php echo $print->title ?> - RimPrints</title>
 </head>
 <body>
-    <nav class="nav">
+<nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <a href="">Library</a>
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href="">Account</a>
+                <a href=""><?php echo $_SESSION['username'] ?></a>
+                <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
                 <a href="signin.php">Sign in</a>
             <?php } ?>

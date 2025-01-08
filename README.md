@@ -12,21 +12,29 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - ~~Print display by id in URL~~
 - Upload
     - ~~mplementation~~
-    - fix css
-    - check date datatype and why doesnt it have time included
-    - make picture preview and actually display it
-- Delete print
+    - ~~fix button css~~
+    - ~~fix to show correct userId~~
+    - ~~check date datatype and why doesnt it have time included~~
+    - ~~redirect not working properly~~
+    - ~~make picture preview and actually display it / halfdone, fix getImagePath~~
+    - Validation
+    - Where do I find my prints?
 - User login + signup
     - ~~$_SESSION login~~
-    - fix uploading to show correct userId
-- Edit print (as OP or admin)
-- User profile
-- Library
-- Account details
+    - ~~Signout~~
+    - ~~show username in nav~~
+    - signup
+- Download print button
+- Delete print
+- Edit print, basically forked upload (as OP or admin) 
 - paging - index
-- frontend finalization- all pages
+- frontend finalization - all pages
+    - index grid fix
 - responsivity
 - documentation
 ## ToDo Extra
+- Account details
+- User profile
+- Library
+    - option to se liked blueprints of other people
 - filters - index
-

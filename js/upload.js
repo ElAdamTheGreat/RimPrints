@@ -1,7 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     const submit = document.getElementById('submit');
     const content = document.getElementById('content');
-    const form = document.getElementById('upload-form');
+
+    document.getElementById('pic').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
 
     submit.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the form from submitting

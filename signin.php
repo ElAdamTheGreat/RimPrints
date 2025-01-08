@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (($_SESSION['isSignedIn'] ?? false)) {
+    header('Location: index.php');
+    exit;
+}
 
 include('server/queries.php');
 include('components/loader/loader.php');
@@ -108,12 +112,13 @@ if (isset($_GET['ajax'])) {
     <title>Sign in - RimPrints</title>
 </head>
 <body>
-    <nav class="nav">
+<nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <a href="">Library</a>
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href="">Account</a>
+                <a href=""><?php echo $_SESSION['username'] ?></a>
+                <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
                 <a href="signin.php">Sign in</a>
             <?php } ?>
