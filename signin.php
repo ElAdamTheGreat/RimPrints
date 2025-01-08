@@ -109,19 +109,14 @@ if (isset($_GET['ajax'])) {
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="components/loader/loader.css">
     <script src="js/signin.js" defer></script>
+    <script type="module" src="js/universal.js" defer></script>
     <title>Sign in - RimPrints</title>
 </head>
 <body>
 <nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
-            <a href="">Library</a>
-            <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href=""><?php echo $_SESSION['username'] ?></a>
-                <button class="link-button" id="signout-btn">Sign out</button>
-            <?php } else { ?>
-                <a href="signin.php">Sign in</a>
-            <?php } ?>
+            <a href="signin.php">Sign in</a>
         </div>
     </nav>
     <div id="content" class="content">

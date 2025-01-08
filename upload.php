@@ -38,14 +38,15 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/upload.css">
     <script src="js/upload.js" defer></script>
+    <script type="module" src="js/universal.js" defer></script>
     <title>Upload Blueprint - RimPrints</title>
 </head>
 <body>
     <nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
-            <a href="">Library</a>
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
+                <a href="">Library</a>
                 <a href=""><?php echo $_SESSION['username'] ?></a>
                 <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
@@ -80,6 +81,16 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             </div>
             <button type="submit" class="btn-sm" id="submit">Upload</button>
         </form>
+    </div>
+    <div class="modal" id="modal-signout">
+        <div class="modal-content">
+            <h2>Sign out?</h2>
+            <p>Are you sire you want to sign out of your account?</p>
+            <div class="modal-buttons">
+                <button class="btn-sm" id="modal-signout-close">Cancel</button>
+                <a href="signout.php" class="btn-sm-red">Sign out</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

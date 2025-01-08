@@ -24,8 +24,9 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
     - ~~Signout~~
     - ~~show username in nav~~
     - signup
-- Download print button
+- ~~Download print button~~
 - Delete print
+- btn-sm-red
 - Edit print, basically forked upload (as OP or admin) 
 - paging - index
 - frontend finalization - all pages
@@ -35,6 +36,7 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 ## ToDo Extra
 - Account details
 - User profile
+- Ability to take a closer look at image
 - Library
     - option to se liked blueprints of other people
 - filters - index

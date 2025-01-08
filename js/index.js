@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const uploadBtn = document.getElementById('upload-btn')
     const modalUpload = new Modal('modal-open', 'modal1-close', 'modal-upload')
     let isSignedIn
-    new Modal('signout-btn', 'modal2-close', 'modal-signout')
 
     uploadBtn.addEventListener('click', function() {
         fetch('server/session.php')

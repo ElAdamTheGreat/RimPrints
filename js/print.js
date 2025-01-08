@@ -13,9 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="low-key">${data.username} · ${data.relCreatedAt}</p>
                     <p>${data.desc}</p>
                 </div>
-                <button class="btn-sm">Download print</button>
+                <a class="btn-sm" id="download-btn">Download print</a>
             </div>
         `;
+        
+        // Download print button
+        let fileTitle = data.title + '.xml'
+        var myFile = new Blob([data.content], {type: 'text/plain'});
+        window.URL = window.URL || window.webkitURL;
+        let downloadBtn = document.getElementById('download-btn');
+        downloadBtn.setAttribute("href", window.URL.createObjectURL(myFile));
+        downloadBtn.setAttribute("download", fileTitle);
+
         //console.log(data.createdAt)
     })
     .catch(error => {
