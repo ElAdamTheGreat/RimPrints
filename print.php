@@ -1,7 +1,5 @@
 <?php
 session_start();
-$isSignedIn = $_SESSION['isSignedIn'] ?? false;
-
 $printId = $_GET['id'] ?? null;
 
 include('server/queries.php');
@@ -14,7 +12,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $relCreatedAt = relativeTime($print->createdAt);
     $relUpdatedAt = relativeTime($print->updatedAt);
     $imagePath = getImagePath($printId);
-
+    $printActions = isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'] === true && ($print->user->id === $_SESSION['userId'] || $_SESSION['role'] === 'admin');
     header('Content-Type: application/json');
     echo json_encode([
         'title' => $print->title,
@@ -25,7 +23,18 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         //'createdAt' => $print->createdAt,
         'relUpdatedAt' => $relUpdatedAt,
         'username' => $print->user->username,
+        'showActions' => $printActions,
     ]);
+    exit;
+}
+
+if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
+    $result = deletePrint($printId);
+    if ($result === true) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false]);
+    }
     exit;
 }
 
@@ -39,10 +48,12 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/print.css">
+    <link rel="stylesheet" href="components/loader/loader.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=keyboard_arrow_down" />
     <script>
         const printId = '<?php echo $printId; ?>';
     </script>
-    <script src="js/print.js" defer></script>
+    <script type="module" src="js/print.js" defer></script>
     <script type="module" src="js/universal.js" defer></script>
     <title><?php echo $print->title ?> - RimPrints</title>
 </head>
@@ -68,10 +79,20 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <div class="modal" id="modal-signout">
         <div class="modal-content">
             <h2>Sign out?</h2>
-            <p>Are you sire you want to sign out of your account?</p>
+            <p>Are you sure you want to sign out of your account?</p>
             <div class="modal-buttons">
                 <button class="btn-sm" id="modal-signout-close">Cancel</button>
                 <a href="signout.php" class="btn-sm-red">Sign out</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal-printDelete">
+        <div class="modal-content">
+            <h2>Delete print?</h2>
+            <p>Are you sure you want to delete this print? This action is irreversible.</p>
+            <div class="modal-buttons" id="delete-buttons">
+                <button class="btn-sm" id="modal-printDelete-close">Cancel</button>
+                <button class="btn-sm-red" id="modal-printDelete-confirm">Delete</button>
             </div>
         </div>
     </div>

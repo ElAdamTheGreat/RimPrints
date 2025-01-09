@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     gap: 5rem;
-    padding: 7rem 20rem 1rem 20rem;
+    padding: 12rem 20rem 1rem 20rem;
     box-sizing: border-box;
 }
 .picture {
@@ -23,6 +23,7 @@
     border-left: 3px solid #424242;
 }
 .section  {
+    width: 480px;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -34,4 +35,25 @@
 }
 .data p, .data h1 {
     margin: 0;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.actions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.toggle-actions {
+    display: flex;
+}
+.rotate-180 {
+    transform: rotate(180deg);
+}
+.actions {
+    display: none;
+    gap: 1rem;
+}
+.actions > * {
+    flex: 1;
 }

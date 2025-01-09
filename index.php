@@ -80,7 +80,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <div class="modal" id="modal-signout">
         <div class="modal-content">
             <h2>Sign out?</h2>
-            <p>Are you sire you want to sign out of your account?</p>
+            <p>Are you sure you want to sign out of your account?</p>
             <div class="modal-buttons">
                 <button class="btn-sm" id="modal-signout-close">Cancel</button>
                 <a href="signout.php" class="btn-sm-red">Sign out</a>

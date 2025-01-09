@@ -27,7 +27,7 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - User signup
 - ~~Download print button~~
 - ~~btn-sm-red~~
-- Delete print (show options in print)
+- ~~Delete print (show options in print)~~
 - Edit print, basically forked upload (as OP or admin) 
 - paging - index
 - frontend finalization - all pages

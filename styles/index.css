@@ -36,6 +36,11 @@
     transform: translateY(-5px);
     box-shadow: 0px 10px 10px #6D563690;
 }
+.card h2, .card p {
+    margin: 0;
+    word-wrap: break-word;
+    word-break: break-word;
+}
 .card img {
     width: 100%;
     object-fit: cover;

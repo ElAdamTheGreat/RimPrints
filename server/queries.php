@@ -69,10 +69,11 @@ function updatePrint($id, $title, $desc, $content): void {
     $query->execute(['id' => $id, 'title' => $title, 'desc' => $desc, 'content' => $content]);
 }
 
-function deletePrint($id): void {
+function deletePrint(int $id): bool {
     global $pdo;
     $query = $pdo->prepare('DELETE FROM "rimprints_Print" WHERE id = :id;');
-    $query->execute(['id' => $id]);
+    $success = $query->execute(['id' => $id]);
+    return $success;
 }
 
 
