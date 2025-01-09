@@ -76,13 +76,29 @@ body {
 .btn-sm-red {
     font-size: 1rem;
     padding: 8px 56px;
-    color: white;
-    background-color: #6A512E;
-    border-top: 5px solid #7D6133;
-    border-right: 5px solid #7D6133;
-    border-bottom: 5px solid #4F3D22;
-    border-left: 5px solid #4F3D22;
+    color: #e64550;
+    background-color: #6a1810;
+    border-top: 5px solid #7d1d12;
+    border-right: 5px solid #7d1d12;
+    border-bottom: 5px solid #4f120c;
+    border-left: 5px solid #4f120c;
     text-decoration: none;
+}
+.btn-sm-red:hover {
+    background-color: #881f11;
+    border-top: 5px solid #962213;
+    border-right: 5px solid #962213;
+    border-bottom: 5px solid #66170d;
+    border-left: 5px solid #66170d;
+    cursor: pointer;
+}
+.btn-sm-red:active {
+    background-color: #62160e;
+    border-top: 5px solid #58140c;
+    border-right: 5px solid #58140c;
+    border-bottom: 5px solid #6d1b13;
+    border-left: 5px solid #6d1b13;
+    cursor: pointer;
 }
 
 .link-button {
@@ -97,19 +113,35 @@ body {
     text-decoration: underline;
 }
 
-.link {
+.link-button-blue {
+    background: none;
+    border: none;
+    color: #4493F8;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+}
+.link-button-blue:hover {
+    text-decoration: underline;
+}
+
+.blue-link {
     color: #4493F8;
     text-decoration: none;
 }
-.link:hover {
+.blue-link:hover {
     text-decoration: underline;
 }
-.link:active {
+.blue-link:active {
     color: #4493F8;
 }
 
 .low-key {
     color: #D3D3D3;
+}
+
+.small-text {
+    font-size: 0.8rem;
 }
 
 .col {
@@ -157,4 +189,18 @@ body {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+}
+
+.error {
+    font-size: 13px;
+    color: red;
+    font-weight: bold;
+}
+
+.required {
+    color: red;
+}
+
+.error-border {
+    border: 2px solid red;
 }

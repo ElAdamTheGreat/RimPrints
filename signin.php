@@ -123,18 +123,20 @@ if (isset($_GET['ajax'])) {
         <form method="POST" id="registration-form">
             <h3>Sign in to RimPrints</h3>
             <div class="form-sec">
-                <label for="usermail">Username or email address</label>
+                <label for="usermail">Username or email address<span class="required">*</span></label>
                 <input type="text" id="usermail" name="usermail" class="form-input" autocomplete="username">
+                <span id="error-usermail" class="error"></span>
             </div>
             <div class="form-sec">
-                <label for="password">Password</label>
+                <label for="password">Password<span class="required">*</span></label>
                 <input type="password" id="password" name="password" class="form-input" autocomplete="current-password">
+                <span id="error-password" class="error"></span>
             </div>
             <span id="error" class="error"></span>
             <div id="status" class="status">
                 <button type="submit" id="submit" class="btn-sm">Sign In</button>
             </div>
-            <a href="signup.php" class="link">Don't have an account yet? Sign up</a>
+            <a href="signup.php" class="blue-link">Don't have an account yet? Sign up</a>
         </form>
     </div>
 </body>

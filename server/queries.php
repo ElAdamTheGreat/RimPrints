@@ -79,7 +79,7 @@ function deletePrint($id): void {
 // User queries
 function createUser($username, $email, $password): void {
     global $pdo;
-    $query = $pdo->prepare('INSERT INTO "rimprints_User" (username, password) VALUES (:username, :email, :password);');
+    $query = $pdo->prepare('INSERT INTO "rimprints_User" (username, email, password) VALUES (:username, :email, :password);');
     $query->execute(['username' => $username, 'email' => $email, 'password' => $password]);
 }
 function checkUserPass($username = null, $email = null): string|null  {

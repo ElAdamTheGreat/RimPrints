@@ -10,23 +10,24 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 # ToDo MVP
 - ~~modals~~
 - ~~Print display by id in URL~~
-- Upload
+- ~~Upload~~
     - ~~mplementation~~
     - ~~fix button css~~
     - ~~fix to show correct userId~~
     - ~~check date datatype and why doesnt it have time included~~
     - ~~redirect not working properly~~
     - ~~make picture preview and actually display it / halfdone, fix getImagePath~~
-    - Validation
-    - Where do I find my prints?
-- User login + signup
+    - ~~Validation~~
+    - ~~Where do I find my prints?~~
+- ~~User login~~
     - ~~$_SESSION login~~
     - ~~Signout~~
     - ~~show username in nav~~
-    - signup
+    - ~~signin input errors separated~~
+- User signup
 - ~~Download print button~~
-- Delete print
-- btn-sm-red
+- ~~btn-sm-red~~
+- Delete print (show options in print)
 - Edit print, basically forked upload (as OP or admin) 
 - paging - index
 - frontend finalization - all pages
@@ -36,6 +37,7 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 ## ToDo Extra
 - Account details
 - User profile
+- tutorials
 - Ability to take a closer look at image
 - Library
     - option to se liked blueprints of other people

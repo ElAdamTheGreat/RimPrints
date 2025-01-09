@@ -16,6 +16,13 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $img = $_FILES['pic']['name'];
     $userId = $_SESSION['userId'] ?? 1;
 
+    // validate data
+    if (strlen($title) > 32 || strlen($desc) > 512 || strlen($xmlContent) > 65535) {
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'Invalid data']);
+        exit;
+    }
+
     $newPrintId = createPrint($title, $desc, $xmlContent, $userId);
     header('Content-Type: application/json');
     echo json_encode(['id' => $newPrintId]);
@@ -25,6 +32,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $newImgName = $newPrintId . '.' . $imgExtension;
     move_uploaded_file($_FILES['pic']['tmp_name'], "lib/img/" . $newImgName);
 
+    // Increase the prints counter
+    $_SESSION['prints'] = $_SESSION['prints'] + 1;
     exit;
 }
 ?>
@@ -37,7 +46,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/upload.css">
-    <script src="js/upload.js" defer></script>
+    <script type="module" src="js/upload.js" defer></script>
     <script type="module" src="js/universal.js" defer></script>
     <title>Upload Blueprint - RimPrints</title>
 </head>
@@ -60,16 +69,20 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             <div class="form-section">
                 <div class="form-data">
                     <div class="form-sec">
-                        <label for="title" class="h3">Blueprint title</label>
-                        <input type="text" class="form-input" id="title" name="title" required>
+                        <label for="title" class="h3">Blueprint title<span class="required">*</span></label>
+                        <input type="text" class="form-input" id="title" name="title">
+                        <span id="error-title" class="error"></span>
                     </div>
                     <div class="form-sec">
                         <label for="desc" class="h3">Description</label>
-                        <textarea class="form-input" id="desc" name="desc" rows="10" required></textarea>
+                        <textarea class="form-input" id="desc" name="desc" rows="10"></textarea>
+                        <span id="error-desc" class="error"></span>
                     </div>
                     <div class="form-sec">
-                        <label for="file" class="h3">Blueprint file (.xml)</label>
-                        <input type="file" class="file" name="file" id="file" accept=".xml" required>
+                        <label for="file" class="h3">Blueprint file<span class="required">*</span> (.xml)</label>
+                        <input type="file" class="file" name="file" id="file" accept=".xml">
+                        <span id="error-file" class="error"></span>
+                        <button id="whereprints-btn" class="link-button-blue">Where do I find my blueprints?</button>
                     </div>
                 </div>
                 <div class="vert-line"></div>
@@ -77,6 +90,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                     <label for="pic" class="h3">Blueprint picture</label>
                     <img src="https://placehold.co/300" alt="preview" id="preview" width="300">
                     <input type="file" class="file" name="pic" id="pic" accept="image/png, image/jpeg">
+                    <span id="error-pic" class="error"></span>
                 </div>
             </div>
             <button type="submit" class="btn-sm" id="submit">Upload</button>
@@ -90,6 +104,29 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                 <button class="btn-sm" id="modal-signout-close">Cancel</button>
                 <a href="signout.php" class="btn-sm-red">Sign out</a>
             </div>
+        </div>
+    </div>
+    <div class="modal" id="modal-whereprints">
+        <div class="modal-content">
+            <h2>Where do I find my blueprints?</h2>
+            <div>
+                <p>Good question! You can do it like this:</p>
+                <h4>Export Blueprint</h4>
+                <ol>
+                    <li>Open the game</li>
+                    <li>Right-click on the blueprint you want to upload</li>
+                    <li>Click on "Export"</li>
+                </ol>
+                <h4>Locate file</h4>
+                <ol>
+                    <li>Open game settings</li>
+                    <li>Open "Log file folder"</li>
+                    <li>In newly opened file explorer open folder named "Blueprints"</li>
+                    <li>Select your desired blueprint</li>
+                </ol>
+                <p class="low-key small-text">C:\Users\&lt;user&gt;\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Blueprints</p>
+            </div>
+            <button class="btn-sm" id="modal-whereprints-close">Ok</button>
         </div>
     </div>
 </body>

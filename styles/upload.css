@@ -20,6 +20,7 @@
     gap: 3rem;
 }
 .form-data {
+    width: 320px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -45,6 +46,7 @@
     padding: 0.5rem;
     border-radius: 8px;
     border: 1px solid #616c7a;
+    resize: none;
 }
 .form-input:focus {
     outline: none;
