@@ -95,7 +95,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                     <span id="error-pic" class="error"></span>
                 </div>
             </div>
-            <button type="submit" class="btn-sm" id="submit">Upload</button>
+            <button type="submit" class="btn" id="submit">Upload</button>
         </form>
     </div>
     <div class="modal" id="modal-signout">
@@ -103,8 +103,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             <h2>Sign out?</h2>
             <p>Are you sure you want to sign out of your account?</p>
             <div class="modal-buttons">
-                <button class="btn-sm" id="modal-signout-close">Cancel</button>
-                <a href="signout.php" class="btn-sm-red">Sign out</a>
+                <button class="btn" id="modal-signout-close">Cancel</button>
+                <a href="signout.php" class="btn-red">Sign out</a>
             </div>
         </div>
     </div>
@@ -128,7 +128,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                 </ol>
                 <p class="low-key small-text">C:\Users\&lt;user&gt;\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Blueprints</p>
             </div>
-            <button class="btn-sm" id="modal-whereprints-close">Ok</button>
+            <button class="btn" id="modal-whereprints-close">Ok</button>
         </div>
     </div>
 </body>

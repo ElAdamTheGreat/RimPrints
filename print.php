@@ -87,8 +87,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
             <h2>Sign out?</h2>
             <p>Are you sure you want to sign out of your account?</p>
             <div class="modal-buttons">
-                <button class="btn-sm" id="modal-signout-close">Cancel</button>
-                <a href="signout.php" class="btn-sm-red">Sign out</a>
+                <button class="btn" id="modal-signout-close">Cancel</button>
+                <a href="signout.php" class="btn-red">Sign out</a>
             </div>
         </div>
     </div>
@@ -97,8 +97,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
             <h2>Delete print?</h2>
             <p>Are you sure you want to delete this print? This action is irreversible.</p>
             <div class="modal-buttons" id="delete-buttons">
-                <button class="btn-sm" id="modal-printDelete-close">Cancel</button>
-                <button class="btn-sm-red" id="modal-printDelete-confirm">Delete</button>
+                <button class="btn" id="modal-printDelete-close">Cancel</button>
+                <button class="btn-red" id="modal-printDelete-confirm">Delete</button>
             </div>
         </div>
     </div>

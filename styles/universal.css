@@ -45,9 +45,48 @@ body {
     text-decoration: underline;
 }
 
-.btn-sm {
+.btn {
     font-size: 1rem;
     padding: 8px 56px;
+    color: white;
+    background-color: #6A512E;
+    border-top: 5px solid #7D6133;
+    border-right: 5px solid #7D6133;
+    border-bottom: 5px solid #4F3D22;
+    border-left: 5px solid #4F3D22;
+    text-decoration: none;
+    text-align: center;
+}
+.btn:hover {
+    background-color: #886432;
+    border-top: 5px solid #967036;
+    border-right: 5px solid #967036;
+    border-bottom: 5px solid #664B25;
+    border-left: 5px solid #664B25;
+    cursor: pointer;
+}
+.btn:active {
+    background-color: #664B25;
+    border-top: 5px solid #584223;
+    border-right: 5px solid #584223;
+    border-bottom: 5px solid #6D5636;
+    border-left: 5px solid #6D5636;
+    cursor: pointer;
+}
+.btn:disabled {
+    color: #636363;
+    background-color: #4b371b;
+    border-top: 5px solid #3f2f19;
+    border-right: 5px solid #3f2f19;
+    border-bottom: 5px solid #4b3b25;
+    border-left: 5px solid #4b3b25;
+    cursor: default;
+}
+
+
+.btn-sm {
+    font-size: 1rem;
+    padding: 8px 12px;
     color: white;
     background-color: #6A512E;
     border-top: 5px solid #7D6133;
@@ -73,8 +112,18 @@ body {
     border-left: 5px solid #6D5636;
     cursor: pointer;
 }
+.btn-sm:disabled {
+    color: #636363;
+    background-color: #4b371b;
+    border-top: 5px solid #3f2f19;
+    border-right: 5px solid #3f2f19;
+    border-bottom: 5px solid #4b3b25;
+    border-left: 5px solid #4b3b25;
+    cursor: default;
+}
 
-.btn-sm-red {
+
+.btn-red {
     font-size: 1rem;
     padding: 8px 56px;
     color: #e64550;
@@ -86,7 +135,7 @@ body {
     text-decoration: none;
     text-align: center;
 }
-.btn-sm-red:hover {
+.btn-red:hover {
     background-color: #881f11;
     border-top: 5px solid #962213;
     border-right: 5px solid #962213;
@@ -94,7 +143,7 @@ body {
     border-left: 5px solid #66170d;
     cursor: pointer;
 }
-.btn-sm-red:active {
+.btn-red:active {
     background-color: #62160e;
     border-top: 5px solid #58140c;
     border-right: 5px solid #58140c;
@@ -103,15 +152,6 @@ body {
     cursor: pointer;
 }
 
-.btn-sm:disabled {
-    color: #636363;
-    background-color: #4b371b;
-    border-top: 5px solid #3f2f19;
-    border-right: 5px solid #3f2f19;
-    border-bottom: 5px solid #4b3b25;
-    border-left: 5px solid #4b3b25;
-    cursor: default;
-}
 
 .link-button {
     background: none;

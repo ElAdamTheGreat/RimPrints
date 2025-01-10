@@ -135,7 +135,7 @@ if (isset($_GET['ajax'])) {
             </div>
             <span id="error" class="error text-center"></span>
 
-            <button type="submit" id="submit" class="btn-sm">Sign In</button>
+            <button type="submit" id="submit" class="btn">Sign In</button>
 
             <a href="signup.php" class="blue-link">Don't have an account yet? Sign up</a>
         </form>

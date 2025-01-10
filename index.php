@@ -1,24 +1,33 @@
 <?php
 session_start();
+$page = $_GET['page'] ?? 1;
 
 include('server/queries.php');
 include('components/loader/loader.php');
 include('functions/getImagePath.php');
 
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
-    $prints = getAll();
+    $result = getAll((int)$page);
 
     header('Content-Type: application/json');
-    $response = [];
+    $totalPages = $result['totalPages'];
+    $prints = $result['prints'];
+
+    $response = [
+        'totalPages' => $totalPages,
+        'prints' => []
+    ];
+
     foreach ($prints as $print) {
         $imagePath = getImagePath($print->id);
-        $response[] = [
+        $response['prints'][] = [
             'id' => $print->id,
             'title' => $print->title,
             'img' => $imagePath,
             'username' => $print->user->username,
         ];
     }
+
     echo json_encode($response);
     exit;
 }
@@ -33,6 +42,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/index.css">
+    <script>
+        let currentPage = '<?php echo $page; ?>';
+    </script>
     <script type="module" src="js/index.js" defer></script>
     <script type="module" src="js/universal.js" defer></script>
     <title>RimPrints</title>
@@ -53,7 +65,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <div class="content">
         <div class="heading">
             <h1>Community blueprints</h1>
-            <button id="upload-btn" class="btn-sm">Upload</button>
+            <button id="upload-btn" class="btn">Upload</button>
         </div>
 
         <div class="data" id="data">
@@ -62,14 +74,20 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                 <h3>Loading data...</h3>
             </div>
         </div>
+
+        <div class="pagination" id="pagination">
+            <button class="btn-sm" id="prev-btn" disabled><</button>
+            <span id="page-number"></span>
+            <button class="btn-sm" id="next-btn">></button>
+        </div>
     </div>
     <div class="modal" id="modal-upload">
         <div class="modal-content">
             <h2>Login required</h2>
             <p>Unregistered users are not allowed to create prints. Please sign in to continue.</p>
             <div class="modal-buttons">
-                <button class="btn-sm" id="modal1-close">Cancel</button>
-                <a href="signin.php" class="btn-sm">Sign In</a>
+                <button class="btn" id="modal1-close">Cancel</button>
+                <a href="signin.php" class="btn">Sign In</a>
             </div>
         </div>
     </div>
@@ -78,8 +96,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             <h2>Sign out?</h2>
             <p>Are you sure you want to sign out of your account?</p>
             <div class="modal-buttons">
-                <button class="btn-sm" id="modal-signout-close">Cancel</button>
-                <a href="signout.php" class="btn-sm-red">Sign out</a>
+                <button class="btn" id="modal-signout-close">Cancel</button>
+                <a href="signout.php" class="btn-red">Sign out</a>
             </div>
         </div>
     </div>

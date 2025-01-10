@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="section">
                 <div class="data">
                     <h1>${data.title}</h1>
-                    <p class="low-key">${data.username} · ${data.relCreatedAt}</p>
+                    <p class="low-key">${data.username} · created ${data.relCreatedAt} ${data.relCreatedAt != data.relUpdatedAt ? `(edited)` : ``}</p>
                     <p>${data.desc}</p>
                 </div>
-                <a class="btn-sm" id="download-btn">Download print</a>
+                <a class="btn" id="download-btn">Download print</a>
 
                 ${data.showActions ? `
                 <div class="actions-container">
@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <button id="toggle-actions" class="link-button">Show actions</button>
                     </div>
                     <div class="actions">
-                        <a href="edit.php?id=${printId}" class="btn-sm">Edit</a>
-                        <button id="printDelete-btn" class="btn-sm-red">Delete</button>
+                        <a href="edit.php?id=${printId}" class="btn">Edit</a>
+                        <button id="printDelete-btn" class="btn-red">Delete</button>
                     </div>
                 </div>
                 ` : ''}
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         modalButtons.innerHTML = `
                             <p>${data.error}</p>
-                            <button id="modal-printDelete-close" class="btn-sm">Close</button>
+                            <button id="modal-printDelete-close" class="btn">Close</button>
                         `;
                     }
                 });

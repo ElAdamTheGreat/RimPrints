@@ -104,7 +104,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
             
             <span id="error" class="error text-center"></span>
 
-            <button type="submit" id="submit" class="btn-sm" disabled>Sign up</button>
+            <button type="submit" id="submit" class="btn" disabled>Sign up</button>
 
             <a href="signin.php" class="blue-link">Already have an account? Sign in</a>
         </form>

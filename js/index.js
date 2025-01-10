@@ -22,17 +22,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-    fetch(`index.php?ajax=1`)
+    fetch(`index.php?page=${currentPage}&ajax=1`)
     .then(response => response.json())
     .then(data => {
+        const totalPages = data.totalPages;
+        const prints = data.prints;
+        const currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+
         dataElement.innerHTML = ''; // Clear the loading message
 
         const printGrid = document.createElement('div');
         printGrid.className = 'print-grid';
         dataElement.appendChild(printGrid);
 
-        data.forEach(print => {
+        prints.forEach(print => {
             const printCard = document.createElement('a');
             printCard.href = `print.php?id=${print.id}`;
             printCard.className = 'card';
@@ -45,9 +48,53 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             printGrid.appendChild(printCard);
         });
+
+        // Pagination
+        setupPagination(currentPage, totalPages);
     })
     .catch(error => {
         console.error('Error fetching data:', error);
-        dataElement.innerHTML = '<p>Error loading data. Please try again later.</p>';
+        dataElement.innerHTML = '<p>Something went wrong. Please try again later.</p>';
     });
 });
+
+function setupPagination(currentPage, totalPages) {
+    if (totalPages <= 1) {
+        return;
+    }
+
+    // Cache elements to avoid repetitive DOM lookups
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const pagination = document.getElementById('pagination');
+    const pageNumber = document.getElementById('page-number');
+
+    // Set initial button states
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+
+    // Update the pagination display
+    pagination.style.display = 'flex';
+    pageNumber.textContent = `${currentPage} / ${totalPages}`;
+
+    // Remove old listeners if needed
+    prevBtn.replaceWith(prevBtn.cloneNode(true)); // Clears all attached listeners
+    nextBtn.replaceWith(nextBtn.cloneNode(true));
+
+    // Rebind updated buttons after clone
+    const newPrevBtn = document.getElementById('prev-btn');
+    const newNextBtn = document.getElementById('next-btn');
+
+    // Attach event listeners
+    newPrevBtn.addEventListener('click', function () {
+        if (currentPage > 1) {
+            window.location.href = `index.php?page=${currentPage - 1}`;
+        }
+    });
+
+    newNextBtn.addEventListener('click', function () {
+        if (currentPage < totalPages) {
+            window.location.href = `index.php?page=${currentPage + 1}`;
+        }
+    });
+}

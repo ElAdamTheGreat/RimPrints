@@ -15,18 +15,54 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 // GET queries for prints
-function getAll(): array {
+function getAll(int $page): array {
     global $pdo;
-    $query = $pdo->query('SELECT p.id, p.title, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id;');
+
+    // Number of items per page
+    $limit = 12;
+
+    // Step 1: Get the total number of prints
+    $totalQuery = $pdo->query('SELECT COUNT(*) as total FROM "rimprints_Print";');
+    $totalResult = $totalQuery->fetch(PDO::FETCH_ASSOC);
+    $totalPrints = (int) $totalResult['total'];
+    $totalPages = ceil($totalPrints / $limit);
+
+    // Step 2: Calculate the offset based on the current page
+    $offset = ($page - 1) * $limit;
+
+    // Step 3: Get the current page of prints
+    $query = $pdo->prepare('
+        SELECT 
+            p.id, 
+            p.title, 
+            u.id as user_id, 
+            u.username as user_username 
+        FROM "rimprints_Print" p 
+        JOIN "rimprints_User" u ON p."userId" = u.id
+        ORDER BY p.id DESC
+        LIMIT :limit OFFSET :offset;
+    ');
+
+    $query->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $query->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $query->execute();
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    // Step 4: Transform the results into models
     $prints = [];
     foreach ($results as $row) {
         $user = new MiniUserModel($row['user_id'], $row['user_username']);
-        $prints[] = new MiniPrintModel($row['id'], $row['title'],  $user);
+        $prints[] = new MiniPrintModel($row['id'], $row['title'], $user);
     }
-    return $prints;
+
+    // Step 5: Return prints along with total pages
+    return [
+        'prints' => $prints,
+        'totalPages' => $totalPages,
+    ];
 }
+
+
 
 function getPrintById($id): PrintModel|null {
     global $pdo;
@@ -65,7 +101,7 @@ function createPrint(string $title, string $desc, string $content, int $user_id)
 
 function updatePrint($id, $title, $desc, $content): void {
     global $pdo;
-    $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, "desc" = :desc, content = :content WHERE id = :id;');
+    $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, "desc" = :desc, content = :content, "updatedAt" = NOW() WHERE id = :id;');
     $query->execute(['id' => $id, 'title' => $title, 'desc' => $desc, 'content' => $content]);
 }
 

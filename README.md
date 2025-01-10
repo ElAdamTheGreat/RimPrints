@@ -26,12 +26,13 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
     - ~~signin input errors separated~~
 - ~~User signup~~
 - ~~Download print button~~
-- ~~btn-sm-red~~
+- ~~btn-red~~
 - ~~Delete print (show options in print)~~
 - ~~Edit print, basically forked upload (as OP or admin)~~
 - paging - index
 - frontend finalization - all pages
     - index grid fix
+- xss a sql injection
 - responsivity
 - documentation
 ## ToDo Extra
