@@ -14,7 +14,7 @@ $pdo = new PDO($dsn, $user, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-// get queries (read)
+// GET queries for prints
 function getAll(): array {
     global $pdo;
     $query = $pdo->query('SELECT p.id, p.title, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id;');
@@ -55,7 +55,7 @@ function getPrintsByUserId($userId): array {
     return $prints;
 }
 
-// Create, update, delete queries
+// CREATE, UPDATE, DELETE queries for prints
 function createPrint(string $title, string $desc, string $content, int $user_id): int {
     global $pdo;
     $query = $pdo->prepare('INSERT INTO "rimprints_Print" (title, "desc", content, "userId", "createdAt", "updatedAt") VALUES (:title, :desc, :content, :user_id, NOW(), NOW());');
@@ -77,12 +77,40 @@ function deletePrint(int $id): bool {
 }
 
 
-// User queries
-function createUser($username, $email, $password): void {
+// USER queries
+function createUser($username, $email, $password, $role): int {
     global $pdo;
-    $query = $pdo->prepare('INSERT INTO "rimprints_User" (username, email, password) VALUES (:username, :email, :password);');
-    $query->execute(['username' => $username, 'email' => $email, 'password' => $password]);
+
+    // Check if the username or email already exists
+    $checkQuery = $pdo->prepare('SELECT COUNT(*) FROM "rimprints_User" WHERE username = :username OR email = :email');
+    $checkQuery->execute(['username' => $username, 'email' => $email]);
+    $count = $checkQuery->fetchColumn();
+
+    if ($count > 0) {
+        // User with the same username or email already exists
+        return 0;
+    }
+
+    // Insert the new user
+    $query = $pdo->prepare('INSERT INTO "rimprints_User" (username, email, password, role) VALUES (:username, :email, :password, :role);');
+    $success = $query->execute(['username' => $username, 'email' => $email, 'password' => $password, 'role' => $role]);
+
+    if ($success) {
+        // Return the newly created user ID
+        return (int) $pdo->lastInsertId();
+    } else {
+        return -1;
+    }
 }
+// Does user with this username exist?
+function isUsernameTaken(string $username): bool {
+    global $pdo;
+    $query = $pdo->prepare('SELECT COUNT(*) FROM "rimprints_User" WHERE username = :username;');
+    $query->execute(['username' => $username]);
+    $result = $query->fetch(PDO::FETCH_COLUMN);
+    return (bool)$result;
+}
+
 function checkUserPass($username = null, $email = null): string|null  {
     global $pdo;
     $conditions = [];

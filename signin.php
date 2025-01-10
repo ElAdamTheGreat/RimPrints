@@ -73,7 +73,15 @@ if (isset($_GET['ajax'])) {
             $role = $userDetails->role;
             $prints = $userDetails->prints;
 
-            // 1. get user details and fill them to session
+            // fill user details to session
+            $_SESSION['isSignedIn'] = true;
+            $_SESSION['userId'] = $userId;
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            $_SESSION['role'] = $role;
+            $_SESSION['prints'] = $prints;
+
+            // send data back to client
             echo json_encode([
                 'success' => true,
                 'user' => [
@@ -84,13 +92,6 @@ if (isset($_GET['ajax'])) {
                     'prints' => $prints
                 ]
             ]);
-
-            $_SESSION['isSignedIn'] = true;
-            $_SESSION['userId'] = $userId;
-            $_SESSION['username'] = $username;
-            $_SESSION['email'] = $email;
-            $_SESSION['role'] = $role;
-            $_SESSION['prints'] = $prints;
         } else {
             echo json_encode(['success' => false, 'error' => 'User not found.']);
         }
@@ -132,10 +133,10 @@ if (isset($_GET['ajax'])) {
                 <input type="password" id="password" name="password" class="form-input" autocomplete="current-password">
                 <span id="error-password" class="error"></span>
             </div>
-            <span id="error" class="error"></span>
-            <div id="status" class="status">
-                <button type="submit" id="submit" class="btn-sm">Sign In</button>
-            </div>
+            <span id="error" class="error text-center"></span>
+
+            <button type="submit" id="submit" class="btn-sm">Sign In</button>
+
             <a href="signup.php" class="blue-link">Don't have an account yet? Sign up</a>
         </form>
     </div>

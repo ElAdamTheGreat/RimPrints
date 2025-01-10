@@ -24,7 +24,7 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
     - ~~Signout~~
     - ~~show username in nav~~
     - ~~signin input errors separated~~
-- User signup
+- ~~User signup~~
 - ~~Download print button~~
 - ~~btn-sm-red~~
 - ~~Delete print (show options in print)~~
@@ -42,3 +42,4 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - Library
     - option to se liked blueprints of other people
 - filters - index
+- signin/signup pages with RimWorld map in background

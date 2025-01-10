@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordElement = document.getElementById('password');
     const errorUsermail = document.getElementById('error-usermail');
     const errorPassword = document.getElementById('error-password');
+    const errorElement = document.getElementById('error');
 
     usermailElement.addEventListener('input', function() {
         usermailElement.style.border = '1px solid #616c7a'
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         const usermail = usermailElement.value;
         const password = passwordElement.value;
-        const status = document.getElementById('status')
+        const submitBtn = document.getElementById('submit')
 
         // Did user enter username or email? 
         let email, username
@@ -46,7 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return
         }
 
-        status.innerHTML = '<div class="small-loader"></div>';
+        submitBtn.setAttribute('disabled', 'true');
+        submitBtn.innerHTML = '<div class="small-loader"></div>'
         
         // Perform AJAX validation
         console.log('Sending AJAX request for validation...');
@@ -88,7 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             } else {
                 errorElement.textContent = data.error;
-                status.innerHTML = '<button type="submit" id="submit" class="btn-sm">Sign In</button>';
+                submitBtn.removeAttribute('disabled');
+                submitBtn.innerHTML = 'Sign Up'
             }
         });
     });
