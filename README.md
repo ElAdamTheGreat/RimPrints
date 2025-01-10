@@ -28,7 +28,7 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - ~~Download print button~~
 - ~~btn-sm-red~~
 - ~~Delete print (show options in print)~~
-- Edit print, basically forked upload (as OP or admin) 
+- ~~Edit print, basically forked upload (as OP or admin)~~
 - paging - index
 - frontend finalization - all pages
     - index grid fix

@@ -1,10 +1,14 @@
 import Modal from './modal.js';
+import Error from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
 
     fetch(`print.php?id=${printId}&ajax=1`)
     .then(response => response.json())
     .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
         document.getElementById('content').innerHTML = `
             <div class="picture">
                 <img src="${data.img}" alt="${data.title} image">
@@ -93,9 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
         //console.log(data.createdAt)
     })
     .catch(error => {
-        document.getElementById('content').innerHTML = `
-            <h1>Print not found</h1>
-        `;
-        console.error('Error: ', error);
+        new Error('content', error.message)
     });
 });

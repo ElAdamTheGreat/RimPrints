@@ -155,16 +155,23 @@ body {
 .small-text {
     font-size: 0.8rem;
 }
+.massive-text {
+    font-size: 5rem;
+}
 
 .col {
     display: flex;
     flex-direction: column;
 }
-
 .center {
     display: flex;
     align-items: center;
     width: 100%;
+}
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .alert {

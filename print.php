@@ -9,9 +9,15 @@ include('functions/getImagePath.php');
 
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $print = getPrintById($printId);
+    $imagePath = getImagePath($printId);
+
+    if (!$print || !$imagePath) {
+        echo json_encode(['error' => '404']);
+        exit;
+    }
+
     $relCreatedAt = relativeTime($print->createdAt);
     $relUpdatedAt = relativeTime($print->updatedAt);
-    $imagePath = getImagePath($printId);
     $printActions = isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'] === true && ($print->user->id === $_SESSION['userId'] || $_SESSION['role'] === 'admin');
     header('Content-Type: application/json');
     echo json_encode([

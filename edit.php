@@ -1,41 +1,72 @@
 <?php
 session_start();
-// is user not signed in?
-if (!($_SESSION['isSignedIn'] ?? false)) {
+$printId = $_GET['id'] ?? null;
+if ($printId === null || !is_numeric($printId)) {
     header('Location: index.php');
     exit;
 }
 
 include('server/queries.php');
 include('components/loader/loader.php');
+include('functions/getImagePath.php');
 
-if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
-    $title = $_POST['title'];
-    $desc = $_POST['desc'];
-    $xmlContent = $_POST['xmlContent'];
-    $img = $_FILES['pic']['name'] ?? 'not-provided';
-    $userId = $_SESSION['userId'] ?? 1;
+if (isset($_GET['ajax'])) {
+    if ($_GET['ajax'] == 1) {
+        $print = getPrintById($printId);
+        $imagePath = getImagePath($printId);
 
-    // validate data
-    if ((strlen($title) > 32 || strlen($title) < 1) || strlen($desc) > 512 || strlen($xmlContent) > 65535) {
-        echo json_encode(['error' => '422']);
+        if (!$print || !$imagePath) {
+            echo json_encode(['error' => '404']);
+            exit;
+        }
+        
+        if (!($_SESSION['isSignedIn'] ?? false) || ($print->user->id !== $_SESSION['userId'] && $_SESSION['role'] !== 'admin')) {
+            echo json_encode(['error' => '401']);
+            exit;
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'title' => $print->title,
+            'desc' => $print->desc,
+            'content' => $print->content,
+            'img' => $imagePath,
+            'userId' => $print->user->id,
+            'username' => $print->user->username,
+        ]);
         exit;
     }
 
-    $newPrintId = createPrint($title, $desc, $xmlContent, $userId);
-    header('Content-Type: application/json');
-    echo json_encode(['id' => $newPrintId]);
+    if ($_GET['ajax'] == 2) {
+        $title = $_POST['title'];
+        $desc = $_POST['desc'];
+        $xmlContent = $_POST['xmlContent'];
+        $img = $_FILES['pic']['name'] ?? 'not-provided';
 
-    // Increase the prints counter
-    $_SESSION['prints'] = $_SESSION['prints'] + 1;
+        // validate data
+        if (strlen($title) > 32 || strlen($desc) > 512 || strlen($xmlContent) > 65535) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Invalid data']);
+            exit;
+        }
 
-    // Save the image file
-    if ($img === 'not-provided') {
+        updatePrint($printId, $title, $desc, $xmlContent);
+        header('Content-Type: application/json');
+        echo json_encode(['id' => $printId]);
+
+        if ($img === 'not-provided') {
+            exit;
+        }
+        // REPLACE the image file
+        $imgPath = getImagePath($printId);
+        if ($imgPath !== 'lib/img/placeholder.png') {
+            unlink($imgPath);
+        }
+        $imgExtension = pathinfo($img, PATHINFO_EXTENSION);
+        $newImgName = $printId . '.' . $imgExtension;
+        move_uploaded_file($_FILES['pic']['tmp_name'], "lib/img/" . $newImgName);
         exit;
     }
-    $imgExtension = pathinfo($img, PATHINFO_EXTENSION);
-    $newImgName = $newPrintId . '.' . $imgExtension;
-    move_uploaded_file($_FILES['pic']['tmp_name'], "lib/img/" . $newImgName);
     exit;
 }
 ?>
@@ -48,7 +79,10 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/upload.css">
-    <script type="module" src="js/upload.js" defer></script>
+    <script>
+        const printId = '<?php echo $printId; ?>';
+    </script>
+    <script type="module" src="js/edit.js" defer></script>
     <script type="module" src="js/universal.js" defer></script>
     <title>Upload Blueprint - RimPrints</title>
 </head>
@@ -66,8 +100,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         </div>
     </nav>
     <div class="content" id="content">
-        <h1>Upload Blueprint</h1>
-        <form id="upload-form" class="form" method="post" enctype="multipart/form-data">
+        <h1>Edit Blueprint</h1>
+        <form id="edit-form" class="form" method="post" enctype="multipart/form-data">
             <div class="form-section">
                 <div class="form-data">
                     <div class="form-sec">
@@ -81,7 +115,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                         <span id="error-desc" class="error"></span>
                     </div>
                     <div class="form-sec">
-                        <label for="file" class="h3">Blueprint file<span class="required">*</span> (.xml)</label>
+                        <label for="file" class="h3">Blueprint file (.xml)</label>
                         <input type="file" class="file" name="file" id="file" accept=".xml">
                         <span id="error-file" class="error"></span>
                         <button id="whereprints-btn" class="link-button-blue">Where do I find my blueprints?</button>
@@ -97,6 +131,10 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             </div>
             <button type="submit" class="btn-sm" id="submit">Upload</button>
         </form>
+        <div class="col" id='loader'>
+            <?php loader() ?>
+            <h3 class="low-key">Loading data...</h3>
+        </div>
     </div>
     <div class="modal" id="modal-signout">
         <div class="modal-content">

@@ -62,10 +62,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                 <h3>Loading data...</h3>
             </div>
         </div>
-
-        <div class="alert">
-            <p>How do I upload?</p>
-        </div>
     </div>
     <div class="modal" id="modal-upload">
         <div class="modal-content">

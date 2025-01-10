@@ -65,7 +65,7 @@ function createPrint(string $title, string $desc, string $content, int $user_id)
 
 function updatePrint($id, $title, $desc, $content): void {
     global $pdo;
-    $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, desc = :desc, content = :content WHERE id = :id;');
+    $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, "desc" = :desc, content = :content WHERE id = :id;');
     $query->execute(['id' => $id, 'title' => $title, 'desc' => $desc, 'content' => $content]);
 }
 

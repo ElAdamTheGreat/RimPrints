@@ -1,10 +1,15 @@
 import Modal from './modal.js';
+import Error from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('upload-form')
+    form.style.display = 'flex'
+
     new Modal('whereprints-btn', 'modal-whereprints-close', 'modal-whereprints')
-    
+
     const titleElement = document.getElementById('title')
     const descElement = document.getElementById('desc')
+    const fileElement = document.getElementById('file')
     const submit = document.getElementById('submit')
     const content = document.getElementById('content')
     const errorTitle = document.getElementById('error-title')
@@ -34,11 +39,15 @@ document.addEventListener('DOMContentLoaded', function() {
         errorDesc.innerHTML = ''
     })
 
+    fileElement.addEventListener('input', function() {
+        errorFile.innerHTML = ''
+    })
+
     submit.addEventListener('click', function(event) {
         event.preventDefault() // Prevent the form from submitting
         const titleValue = titleElement.value
         const descValue = descElement.value
-        const xmlFile = document.getElementById('file').files[0]
+        const xmlFile = fileElement.files[0]
         const picFile = document.getElementById('pic').files[0]
 
         // Validation
@@ -91,8 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.replace(`print.php?id=${data.id}`)
             })
             .catch(error => {
-                console.error('Error fetching data:', error)
-                content.innerHTML = '<p>Error loading data. Please try again later.</p>'
+                new Error('content', error.message)
             })
         }
         reader.readAsText(xmlFile)

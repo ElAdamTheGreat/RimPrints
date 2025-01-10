@@ -8,7 +8,7 @@
 }
 
 .form {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 2rem;
     background-color: #44351c;
