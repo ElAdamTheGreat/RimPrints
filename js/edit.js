@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (xmlFile && xmlFile.type !== 'text/xml') {
                 errorFile.innerHTML = 'Blueprint file must be an XML file.'
-            } else if (xmlFile && xmlFile.size > 65535) {
-                errorFile.innerHTML = 'Blueprint file size is limited to 64KB.'
+            } else if (xmlFile && xmlFile.size > 1048576) {
+                errorFile.innerHTML = 'Blueprint file size is limited to 1MB.'
             }
 
             // output return if at least one error is present
@@ -118,8 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.replace(`print.php?id=${data.id}`)
             })
             .catch(error => {
-                console.error('Error fetching data:', error)
-                content.innerHTML = '<p>Something went wrong. Please try again later.</p>'
+                new Error('content', error.message)
             })
         })
 

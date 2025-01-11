@@ -44,9 +44,8 @@ if (isset($_GET['ajax'])) {
         $img = $_FILES['pic']['name'] ?? 'not-provided';
 
         // validate data
-        if (strlen($title) > 32 || strlen($desc) > 512 || strlen($xmlContent) > 65535) {
-            header('Content-Type: application/json');
-            echo json_encode(['error' => 'Invalid data']);
+        if (strlen($title) > 32 || strlen($desc) > 512 || strlen($xmlContent) > 1048576) {
+            echo json_encode(['error' => '422']);
             exit;
         }
 

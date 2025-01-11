@@ -17,7 +17,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $userId = $_SESSION['userId'] ?? 1;
 
     // validate data
-    if ((strlen($title) > 32 || strlen($title) < 1) || strlen($desc) > 512 || strlen($xmlContent) > 65535) {
+    if ((strlen($title) > 32 || strlen($title) < 1) || strlen($desc) > 512 || strlen($xmlContent) > 1048576) {
         echo json_encode(['error' => '422']);
         exit;
     }

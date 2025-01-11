@@ -106,5 +106,29 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
             </div>
         </div>
     </div>
+    <div class="modal" id="modal-whereprints">
+        <div class="modal-content">
+            <h2>Where do I put blueprints?</h2>
+            <div>
+                <p>Good question! You can do it like this:</p>
+                <h4>Blueprint folder</h4>
+                <ol>
+                    <li>Download blueprint</li>
+                    <li>Open RimWorld > settings</li>
+                    <li>Open "Log file folder"</li>
+                    <li>In newly opened file explorer open folder named "Blueprints"</li>
+                    <li>Put the blueprint you just downloaded here</li>
+                </ol>
+                <p class="low-key small-text">C:\Users\&lt;user&gt;\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Blueprints</p>
+                <h4>Import blueprint</h4>
+                <ol>
+                    <li>Load your save in RimWorld</li>
+                    <li>Right-click on "Create" button in blueprint section</li>
+                    <li>Click on "Import blueprint &lt;title&gt;"</li>
+                </ol>
+            </div>
+            <button class="btn" id="modal-whereprints-close">Ok</button>
+        </div>
+    </div>
 </body>
 </html>

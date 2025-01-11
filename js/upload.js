@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
             errorFile.innerHTML = 'Blueprint file is required.'
         } else if (xmlFile.type !== 'text/xml') {
             errorFile.innerHTML = 'Blueprint file must be an XML file.'
-        } else if (xmlFile.size > 65535) {
-            errorFile.innerHTML = 'Blueprint file size is limited to 64KB.'
+        } else if (xmlFile.size > 1048576) {
+            errorFile.innerHTML = 'Blueprint file size is limited to 1MB.'
         }
 
         // output return if at least one error is present

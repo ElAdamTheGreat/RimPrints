@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${data.desc}</p>
                 </div>
                 <a class="btn" id="download-btn">Download print</a>
-
+                <button id="whereprints-btn" class="link-button-blue">Where do I put blueprints?</button>
                 ${data.showActions ? `
                 <div class="actions-container">
                     <div class="toggle-actions">
@@ -37,8 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-        // Modal for delete print
+        // Modals
         new Modal('printDelete-btn', 'modal-printDelete-close', 'modal-printDelete')
+        new Modal('whereprints-btn', 'modal-whereprints-close', 'modal-whereprints')
 
         // Toggle actions, but only if its defined in the data
         if (data.showActions === true) {
