@@ -2,6 +2,11 @@
 session_start();
 $printId = $_GET['id'] ?? null;
 
+if ($printId === null || !is_numeric($printId)) {
+    header('Location: index.php');
+    exit;
+}
+
 include('server/queries.php');
 include('components/loader/loader.php');
 include('functions/relativeTime.php');
@@ -21,14 +26,14 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $printActions = isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'] === true && ($print->user->id === $_SESSION['userId'] || $_SESSION['role'] === 'admin');
     header('Content-Type: application/json');
     echo json_encode([
-        'title' => $print->title,
-        'desc' => $print->desc,
+        'title' => htmlspecialchars($print->title),
+        'desc' => htmlspecialchars($print->desc),
         'content' => $print->content,
-        'img' => $imagePath,
+        'img' => htmlspecialchars($imagePath),
         'relCreatedAt' => $relCreatedAt,
         //'createdAt' => $print->createdAt,
         'relUpdatedAt' => $relUpdatedAt,
-        'username' => $print->user->username,
+        'username' => htmlspecialchars($print->user->username),
         'showActions' => $printActions,
     ]);
     exit;
@@ -61,15 +66,14 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     </script>
     <script type="module" src="js/print.js" defer></script>
     <script type="module" src="js/universal.js" defer></script>
-    <title><?php echo $print->title ?> - RimPrints</title>
+    <title><?php echo htmlspecialchars($print->title) ?> - RimPrints</title>
 </head>
 <body>
 <nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href="">Library</a>
-                <a href=""><?php echo $_SESSION['username'] ?></a>
+                <a href=""><?php echo htmlspecialchars($_SESSION['username']) ?></a>
                 <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
                 <a href="signin.php">Sign in</a>

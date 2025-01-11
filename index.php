@@ -1,13 +1,16 @@
 <?php
 session_start();
 $page = $_GET['page'] ?? 1;
+if (!is_numeric($page) || $page < 1) {
+    $page = 1;
+}
 
 include('server/queries.php');
 include('components/loader/loader.php');
 include('functions/getImagePath.php');
 
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
-    $result = getAll((int)$page);
+    $result = getAll($page);
 
     header('Content-Type: application/json');
     $totalPages = $result['totalPages'];
@@ -22,9 +25,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         $imagePath = getImagePath($print->id);
         $response['prints'][] = [
             'id' => $print->id,
-            'title' => $print->title,
-            'img' => $imagePath,
-            'username' => $print->user->username,
+            'title' => htmlspecialchars($print->title),
+            'img' => htmlspecialchars($imagePath),
+            'username' => htmlspecialchars($print->user->username),
         ];
     }
 
@@ -54,8 +57,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href="">Library</a>
-                <a href=""><?php echo $_SESSION['username'] ?></a>
+                <a href=""><?php echo htmlspecialchars($_SESSION['username']) ?></a>
                 <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
                 <a href="signin.php">Sign in</a>

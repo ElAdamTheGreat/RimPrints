@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
             printCard.href = `print.php?id=${print.id}`;
             printCard.className = 'card';
             printCard.innerHTML = `
-                <img src="${print.img}" alt="${print.title} image">
+                <div class="cardimg">
+                    <img src="${print.img}" alt="${print.title} image">
+                </div>
                 <h2>${print.title}</h2>
                 <div class="cardinfo">
                     <p class="low-key">by ${print.username}</p>

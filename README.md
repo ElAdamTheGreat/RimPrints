@@ -29,10 +29,9 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - ~~btn-red~~
 - ~~Delete print (show options in print)~~
 - ~~Edit print, basically forked upload (as OP or admin)~~
-- paging - index
-- frontend finalization - all pages
-    - index grid fix
-- xss a sql injection
+- ~~paging - index~~
+- ~~frontend finalization - all pages (ig)~~
+- ~~xss a sql injection~~
 - responsivity
 - documentation
 ## ToDo Extra

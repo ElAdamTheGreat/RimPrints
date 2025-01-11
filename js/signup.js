@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const usernameElement = document.getElementById('username');
     const emailElement = document.getElementById('email');
     const passwordElement = document.getElementById('password');
+    const passwordCheckElement = document.getElementById('password-check');
 
     const errorUsername = document.getElementById('error-username');
     const infoUsername = document.getElementById('info-username');
     const errorEmail = document.getElementById('error-email');
     const errorPassword = document.getElementById('error-password');
+    const errorPasswordCheck = document.getElementById('error-password-check');
     const error = document.getElementById('error');
 
     const submitBtn = document.getElementById('submit')
@@ -20,6 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
             clearTimeout(usernameTimeout);
         }
         usernameTimeout = setTimeout(validateUsername, 500);
+    });
+
+    let passwordCheck = false;
+    let passwordTimeout;
+    passwordCheckElement.addEventListener('input', function() {
+        submitBtn.setAttribute('disabled', 'true');
+        passwordCheck = false
+        if (passwordTimeout) {
+            clearTimeout(passwordTimeout);
+        }
+        passwordTimeout = setTimeout(validatePassword, 500);
     });
 
     function validateUsername() {
@@ -46,12 +59,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     wrongUsername('Username is already taken.', true)
                 } else {
                     usernameCheck = true
-                    submitBtn.removeAttribute('disabled');
+                    if (passwordCheck === true) {
+                        submitBtn.removeAttribute('disabled');
+                    }
                     usernameElement.style.border = '1px solid #616c7a'
                     infoUsername.innerHTML = 'What a wonderful username!'
                     errorUsername.innerHTML = ''
                 }
             })
+        }
+    }
+
+    function validatePassword() {
+        if (passwordElement.value === passwordCheckElement.value) {
+            passwordCheck = true
+            if (usernameCheck === true) {
+                submitBtn.removeAttribute('disabled');
+            }
+            passwordCheckElement.style.border = '1px solid #616c7a'
+            errorPasswordCheck.innerHTML = ''
+        } else {
+            passwordCheckElement.style.border = '2px solid red'
+            errorPasswordCheck.innerHTML = 'Passwords do not match.'
         }
     }
 
@@ -92,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // output return if at least one error is present
-        if (usernameCheck === false || errorEmail.innerHTML || errorPassword.innerHTML) {
+        if (usernameCheck === false || passwordCheck === false || errorEmail.innerHTML || errorPassword.innerHTML) {
             console.log('Error present, exiting...')
             return
         }

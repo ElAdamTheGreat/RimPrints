@@ -101,6 +101,11 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
                 <input type="password" id="password" name="password" class="form-input" autocomplete="new-password">
                 <span id="error-password" class="error"></span>
             </div>
+            <div class="form-sec">
+                <label for="password-check">Password again</label>
+                <input type="password" id="password-check" name="password-check" class="form-input" autocomplete="new-password">
+                <span id="error-password-check" class="error"></span>
+            </div>
             
             <span id="error" class="error text-center"></span>
 
