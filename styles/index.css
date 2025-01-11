@@ -2,26 +2,30 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 7rem 20rem 5rem 20rem;
+    padding: 5rem 2rem 3rem 2rem;
     box-sizing: border-box;
 }
 
 .heading {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+.heading-title {
+    font-size: 1.5rem;
 }
 
 .print-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
 }
 
 .card {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 0.75rem;
     padding: 1rem;
     border-radius: 5px;
     background-color: #6D5636;
@@ -41,6 +45,12 @@
     word-wrap: break-word;
     word-break: break-word;
 }
+.card h2 {
+    font-size: 1.1rem;
+}
+.card p {
+    font-size: 0.75rem;
+}
 
 .cardimg {
     width: 100%;
@@ -59,9 +69,6 @@
     object-fit: contain; 
     transform: translate(-50%, -50%);
 }
-.card p, h2 {
-    margin: 0;
-}
 
 .pagination {
     display: none;
@@ -71,4 +78,150 @@
     margin-top: 2rem;
 }
 
+@media (min-width: 640px) {
+    .content {
+        padding: 7rem 5rem 5rem 5rem;
+    }
 
+    .heading {
+        flex-direction: row;
+    }
+    .heading-title {
+        font-size: 1.5rem;
+    }
+
+    .print-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    .card {
+        gap: 1.1rem;
+    }
+    .card h2 {
+        font-size: 1.2rem;
+    }
+    .card p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        padding: 7rem 8rem 5rem 8rem;
+    }
+
+    .heading {
+        flex-direction: row;
+    }
+    .heading-title {
+        font-size: 1.8rem;
+    }
+
+    .print-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    .card {
+        gap: 0.8rem;
+    }
+    .card h2 {
+        font-size: 1.1rem;
+    }
+    .card p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .content {
+        padding: 7rem 10rem 5rem 10rem;
+    }
+
+    .heading {
+        flex-direction: row;
+    }
+    .heading-title {
+        font-size: 2rem;
+    }
+
+    .print-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    .card {
+        gap: 1rem;
+    }
+    .card h2 {
+        font-size: 1.2rem;
+    }
+    .card p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .content {
+        padding: 7rem 10rem 5rem 10rem;
+    }
+
+    .heading {
+        flex-direction: row;
+    }
+    .heading-title {
+        font-size: 2rem;
+    }
+
+    .print-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    .card {
+        gap: 1.2rem;
+    }
+    .card h2 {
+        font-size: 1.4rem;
+    }
+    .card p {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1536px) {
+    .content {
+        padding: 7rem 20rem 5rem 20rem;
+    }
+
+    .heading {
+        flex-direction: row;
+    }
+    .heading-title {
+        font-size: 2rem;
+    }
+
+    .print-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    .card {
+        gap: 1.2rem;
+    }
+    .card h2 {
+        font-size: 1.4rem;
+    }
+    .card p {
+        font-size: 1rem;
+    }
+}
+
+@media print {
+    .content {
+        padding: 2rem;
+    }
+    .print-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    h1, h2, h3, h4, h5, h6, p {
+        color: black;
+    }
+}

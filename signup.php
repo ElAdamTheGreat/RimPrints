@@ -76,7 +76,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     <title>Sign up - RimPrints</title>
 </head>
 <body>
-<nav class="nav">
+    <nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <a href="signin.php">Sign in</a>
@@ -111,7 +111,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
 
             <button type="submit" id="submit" class="btn" disabled>Sign up</button>
 
-            <a href="signin.php" class="blue-link">Already have an account? Sign in</a>
+            <a href="signin.php" class="blue-link responsive-text">Already have an account? Sign in</a>
         </form>
     </div>
 </body>

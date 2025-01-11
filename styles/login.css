@@ -13,18 +13,6 @@ body {
 	background-size: 400% 400%;
 	animation: gradient 7s ease infinite;
 }
-
-.content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    height: 100vh;
-    width: 100vw;
-    box-sizing: border-box;
-}
-
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -36,21 +24,32 @@ body {
 		background-position: 0% 50%;
 	}
 }
-h3 {
-    font-size: 1.75rem;
-    font-weight: 500;
-    text-align: center;
-    margin: 0;
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 100vh;
+    width: 100vw;
+    padding: 5rem 1rem 2rem 1rem;
+    box-sizing: border-box;
 }
+
 form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     background-color: #15191d;
     border: 1px solid #616c7a;
-    padding: 2rem;
-    width: 300px;
-    box-shadow: 0 2px 10px rgba(79, 79, 79, 0.2)
+    box-shadow: 0 2px 10px rgba(79, 79, 79, 0.2);
+    box-sizing: border-box;
+}
+h3 {
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
 }
 .form-sec {
     display: flex;
@@ -69,11 +68,43 @@ label {
 .form-input:focus {
     outline: none;
 }
-
 .status {
     width: 100%;
     display: flex;
     justify-content: center
 }
 
+@media (min-width: 0px) {
+    form {
+        width: 100%;
+        padding: 1.3rem;
+    }
+    h3 {
+        font-size: 1.3rem;
+    }
+    label {
+        font-size: 0.9rem;
+    }
+}
 
+@media (min-width: 640px) {
+    form {
+        width: 360px;
+        padding: 2rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
+    label {
+        font-size: 1rem;
+    }
+}
+
+@media print {
+    .content {
+        padding: 2rem;
+    }
+    h1, h2, h3, h4, h5, h6, p, label, button, a {
+        color: black;
+    }
+}

@@ -57,7 +57,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href=""><?php echo htmlspecialchars($_SESSION['username']) ?></a>
                 <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
                 <a href="signin.php">Sign in</a>
@@ -83,13 +82,13 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                         <label for="file" class="h3">Blueprint file<span class="required">*</span> (.xml)</label>
                         <input type="file" class="file" name="file" id="file" accept=".xml">
                         <span id="error-file" class="error"></span>
-                        <button id="whereprints-btn" class="link-button-blue">Where do I find my blueprints?</button>
+                        <button id="whereprints-btn" class="link-button-blue responsive-text">Where do I find my blueprints?</button>
                     </div>
                 </div>
                 <div class="vert-line"></div>
                 <div class="form-picture">
                     <label for="pic" class="h3">Blueprint picture</label>
-                    <img src="https://placehold.co/300" alt="preview" id="preview" width="300">
+                    <img src="https://placehold.co/300" alt="preview" id="preview">
                     <input type="file" class="file" name="pic" id="pic" accept="image/png, image/jpeg">
                     <span id="error-pic" class="error"></span>
                 </div>

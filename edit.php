@@ -90,7 +90,6 @@ if (isset($_GET['ajax'])) {
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
         <div class="nav-links">
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
-                <a href=""><?php echo htmlspecialchars($_SESSION['username']) ?></a>
                 <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>
                 <a href="signin.php">Sign in</a>

@@ -9,6 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.error) {
             throw new Error(data.error);
         }
+
+        // Set the title of the page to the print title
+        function decodeHtmlEntities(str) {
+            var txt = document.createElement('textarea');
+            txt.innerHTML = str;
+            return txt.value;
+        }
+        document.title = decodeHtmlEntities(data.title) + ' - RimPrints';  
+
         document.getElementById('content').innerHTML = `
             <div class="picture">
                 <img src="${data.img}" alt="${data.title} image">

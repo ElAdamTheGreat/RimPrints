@@ -32,14 +32,9 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - ~~paging - index~~
 - ~~frontend finalization - all pages (ig)~~
 - ~~xss a sql injection~~
-- responsivity
-    - index
-    - print
-    - upload/edit
-    - signin/signup
-    - modal
+- ~~How to import blueprint~~
+- ~~responsivity~~
 - documentation
-- How to import blueprint
 ## ToDo Extra
 - Account details
 - User profile
