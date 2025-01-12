@@ -1,0 +1,78 @@
+PS C:\WebyVS\RimPrints> phpdoc
+
+C:\WebyVS\RimPrints>php.exe c:\xampp\php\phpdocumentor.phar  
+PHP Deprecated:  Twig\Environment::createTemplate(): Implicitly marking parameter $name as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Environment.php on line 446
+
+Deprecated: Twig\Environment::createTemplate(): Implicitly marking parameter $name as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Environment.php on line 446
+PHP Deprecated:  League\Flysystem\MountManager::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/flysystem/src/MountManager.php on line 642
+
+Deprecated: League\Flysystem\MountManager::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/flysystem/src/MountManager.php on line 642
+PHP Deprecated:  League\Flysystem\FilesystemInterface::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/flysystem/src/FilesystemInterface.php on line 274
+
+Deprecated: League\Flysystem\FilesystemInterface::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/flysystem/src/FilesystemInterface.php on line 274
+PHP Deprecated:  Twig\Loader\FilesystemLoader::__construct(): Implicitly marking parameter $rootPath as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Loader/FilesystemLoader.php on line 37
+
+Deprecated: Twig\Loader\FilesystemLoader::__construct(): Implicitly marking parameter $rootPath as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Loader/FilesystemLoader.php on line 37
+PHP Deprecated:  League\Pipeline\Pipeline::__construct(): Implicitly marking parameter $processor as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/pipeline/src/Pipeline.php on line 18
+
+Deprecated: League\Pipeline\Pipeline::__construct(): Implicitly marking parameter $processor as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/pipeline/src/Pipeline.php on line 18
+PHP Deprecated:  League\Pipeline\PipelineBuilder::build(): Implicitly marking parameter $processor as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/pipeline/src/PipelineBuilder.php on line 23
+
+Deprecated: League\Pipeline\PipelineBuilder::build(): Implicitly marking parameter $processor as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/pipeline/src/PipelineBuilder.php on line 23
+PHP Deprecated:  League\Pipeline\PipelineBuilderInterface::build(): Implicitly marking parameter $processor as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/pipeline/src/PipelineBuilderInterface.php on line 18
+
+Deprecated: League\Pipeline\PipelineBuilderInterface::build(): Implicitly marking parameter $processor as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/pipeline/src/PipelineBuilderInterface.php on line 18
+PHP Deprecated:  League\Uri\Uri::createFromBaseUri(): Implicitly marking parameter $base_uri as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/uri/src/Uri.php on line 419
+
+Deprecated: League\Uri\Uri::createFromBaseUri(): Implicitly marking parameter $base_uri as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/uri/src/Uri.php on line 419
+phpDocumentor 3.6.0
+
+PHP Deprecated:  League\Flysystem\Filesystem::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/flysystem/src/Filesystem.php on line 363
+
+Deprecated: League\Flysystem\Filesystem::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/league/flysystem/src/Filesystem.php on line 363
+Parsing files
+ 15/15 [============================] 100%
+Applying transformations (can take a while)
+PHP Deprecated:  Twig\Node\Node::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/Node.php on line 39
+
+Deprecated: Twig\Node\Node::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/Node.php on line 39
+PHP Deprecated:  Twig\Parser::addImportedSymbol(): Implicitly marking parameter $node as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Parser.php on line 274
+
+Deprecated: Twig\Parser::addImportedSymbol(): Implicitly marking parameter $node as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Parser.php on line 274
+PHP Deprecated:  Twig\NodeVisitor\SafeAnalysisNodeVisitor::intersectSafe(): Implicitly marking parameter $a as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/NodeVisitor/SafeAnalysisNodeVisitor.php on line 137
+
+Deprecated: Twig\NodeVisitor\SafeAnalysisNodeVisitor::intersectSafe(): Implicitly marking parameter $a as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/NodeVisitor/SafeAnalysisNodeVisitor.php on line 137
+PHP Deprecated:  Twig\NodeVisitor\SafeAnalysisNodeVisitor::intersectSafe(): Implicitly marking parameter $b as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/NodeVisitor/SafeAnalysisNodeVisitor.php on line 137
+
+Deprecated: Twig\NodeVisitor\SafeAnalysisNodeVisitor::intersectSafe(): Implicitly marking parameter $b as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/NodeVisitor/SafeAnalysisNodeVisitor.php on line 137
+PHP Deprecated:  Twig\TokenStream::__construct(): Implicitly marking parameter $source as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/TokenStream.php on line 28
+
+Deprecated: Twig\TokenStream::__construct(): Implicitly marking parameter $source as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/TokenStream.php on line 28
+PHP Deprecated:  Twig\TokenStream::expect(): Implicitly marking parameter $message as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/TokenStream.php on line 71
+
+Deprecated: Twig\TokenStream::expect(): Implicitly marking parameter $message as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/TokenStream.php on line 71
+PHP Deprecated:  Twig\Node\BlockNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/BlockNode.php on line 24
+
+Deprecated: Twig\Node\BlockNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/BlockNode.php on line 24
+PHP Deprecated:  Twig\Node\Expression\ArrayExpression::addElement(): Implicitly marking parameter $key as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/Expression/ArrayExpression.php on line 59
+
+Deprecated: Twig\Node\Expression\ArrayExpression::addElement(): Implicitly marking parameter $key as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/Expression/ArrayExpression.php on line 59
+PHP Deprecated:  Twig\Template::displayBlock(): Implicitly marking parameter $templateContext as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Template.php on line 162
+
+Deprecated: Twig\Template::displayBlock(): Implicitly marking parameter $templateContext as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Template.php on line 162
+PHP Deprecated:  Twig\Node\SetNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/SetNode.php on line 24
+
+Deprecated: Twig\Node\SetNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/SetNode.php on line 24
+PHP Deprecated:  Twig\Node\PrintNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/PrintNode.php on line 25
+
+Deprecated: Twig\Node\PrintNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/PrintNode.php on line 25
+PHP Deprecated:  Twig\Node\BlockReferenceNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/BlockReferenceNode.php on line 24
+
+Deprecated: Twig\Node\BlockReferenceNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/BlockReferenceNode.php on line 24
+PHP Deprecated:  Twig\Node\IncludeNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/IncludeNode.php on line 25
+PHP Deprecated:  Twig\Node\Expression\BlockReferenceExpression::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/Expression/BlockReferenceExpression.php on line 25
+PHP Deprecated:  Twig\Node\IfNode::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Nophp/phpDocumentor.phar/vendor/twig/twig/src/Node/IfNode.php on line 24
+PHP Deprecated:  Twig\Node\Expression\FilterExpression::__construct(): Implicitly marking parameter $tag as nullable is deprecated, the explicit nullable type must be used instead in phar://C:/xampp/php/phpDocumentor.phar/ved in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Node/Expression/FilterExpression.php on line 20
+PHP Parse error:  syntax error, unexpected token ":" in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Environment.php(418) : eval()'d code on line 54
+
+Parse error: syntax error, unexpected token ":" in phar://C:/xampp/php/phpDocumentor.phar/vendor/twig/twig/src/Environment.php(418) : eval()'d code on line 54

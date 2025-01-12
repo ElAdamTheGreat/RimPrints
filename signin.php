@@ -133,17 +133,18 @@ if (isset($_GET['ajax'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico">
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="components/loader/loader.css">
-    <script src="js/signin.js" defer></script>
-    <script type="module" src="js/universal.js" defer></script>
+    <script src="js/signin.js"></script>
+    <script type="module" src="js/universal.js"></script>
     <title>Sign in - RimPrints</title>
 </head>
 <body>
-<nav class="nav">
-        <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
+    <nav class="nav">
+        <a href="index.php" class="nav-title">R i m P r i n t s</a>
+        <a href="index.php" class="nav-title-mobile">R</a>
         <div class="nav-links">
             <a href="signin.php">Sign in</a>
         </div>

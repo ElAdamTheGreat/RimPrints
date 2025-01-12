@@ -16,25 +16,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.25rem 1.5rem 0.25rem 1.5rem;
+    padding: 1.25rem 1.5rem 1.25rem 1.5rem;
     backdrop-filter: blur(8px);
     width: 100%;
     box-sizing: border-box;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     z-index: 10;
 }
-.nav-title {
-    display: none;
+.nav-title, .nav-title-mobile {
     font-family: 'RimWorldFont';
     text-decoration: none;
     color: inherit;
-    font-size: 1.1rem;
-}
-.nav-title-mobile {
-    font-family: 'RimWorldFont';
-    text-decoration: none;
-    color: inherit;
-    font-size: 0.75rem;
 }
 .nav-links {
     display: flex;
@@ -203,9 +195,6 @@ body {
 .small-text {
     font-size: 0.8rem;
 }
-.massive-text {
-    font-size: 5rem;
-}
 
 .col {
     display: flex;
@@ -292,15 +281,26 @@ body {
 }
 
 @media (min-width: 0px) {
+    .nav-title {
+        display: none;
+        font-size: 2rem;
+    }
+    .nav-title-mobile {
+        font-size: 1.1rem;
+    }
+
     .responsive-text {
         font-size: 0.9rem;
+    }
+    .massive-text {
+        font-size: 3rem;
     }
 }
 
 
 @media (min-width: 640px) {
     .nav {
-        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+        padding: 1.5rem 1.5rem 1.5rem 1.5rem;
     }
     .nav-title {
         display: block;
@@ -345,6 +345,9 @@ body {
 
     .responsive-text {
         font-size: 1rem;
+    }
+    .massive-text {
+        font-size: 5rem;
     }
 }
 

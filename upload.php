@@ -31,7 +31,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     /**
      * Validate data
      */
-    if ((strlen($title) > 32 || strlen($title) < 1) || strlen($desc) > 512 || strlen($xmlContent) > 1048576) {
+    if ((strlen($title) > 32 || strlen($title) < 1) || strlen($desc) > 512 || strlen($xmlContent) > 1048576 || $img !== 'not-provided' && !in_array(pathinfo($img, PATHINFO_EXTENSION), ['png', 'jpeg'])) {
         echo json_encode(['error' => '422']);
         exit;
     }
@@ -61,17 +61,17 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico">
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/upload.css">
-    <script type="module" src="js/upload.js" defer></script>
-    <script type="module" src="js/universal.js" defer></script>
+    <script type="module" src="js/upload.js"></script>
+    <script type="module" src="js/universal.js"></script>
     <title>Upload Blueprint - RimPrints</title>
 </head>
 <body>
     <nav class="nav">
-        <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
-        <a href="index.php" class="nav-title-mobile"><h1>R</h1></a>
+        <a href="index.php" class="nav-title">R i m P r i n t s</a>
+        <a href="index.php" class="nav-title-mobile">R</a>
         <div class="nav-links">
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
                 <a href="admin.php">Administration</a>

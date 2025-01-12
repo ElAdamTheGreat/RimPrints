@@ -1,5 +1,5 @@
 import Modal from './modal.js';
-import Error from './error.js';
+import OutputError from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const dataElement = document.getElementById('data')
@@ -26,16 +26,20 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`index.php?page=${currentPage}&ajax=1`)
     .then(response => response.json())
     .then(data => {
-        if (data === null) {
-            dataElement.innerHTML = 'No prints found.';
-            return;
+        if (data.error) {
+            throw new Error(data.error);
         }
+
+        dataElement.innerHTML = ''; // Clear the loading message
 
         const totalPages = data.totalPages;
         const prints = data.prints;
         const currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
 
-        dataElement.innerHTML = ''; // Clear the loading message
+        if (currentPage > totalPages) {
+            window.location.href = `index.php?page=${totalPages}`;
+            return;
+        }
 
         const printGrid = document.createElement('div');
         printGrid.className = 'print-grid';
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupPagination(currentPage, totalPages);
     })
     .catch(error => {
-        new Error('data', error.message)
+        new OutputError('data', error.message)
     })
 });
 

@@ -1,5 +1,5 @@
 import Modal from './modal.js';
-import Error from './error.js';
+import OutputError from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -115,10 +115,13 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
+                if (data.error) {
+                    throw new Error(data.error)
+                }
                 window.location.replace(`print.php?id=${data.id}`)
             })
             .catch(error => {
-                new Error('content', error.message)
+                new OutputError('content', error.message)
             })
         })
 
@@ -127,6 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     })
     .catch(error => {
-        new Error('content', error.message)
+        new OutputError('content', error.message)
     })
 })

@@ -1,5 +1,5 @@
 import Modal from './modal.js';
-import Error from './error.js';
+import OutputError from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('upload-form')
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorTitle = document.getElementById('error-title')
     const errorDesc = document.getElementById('error-desc')
     const errorFile = document.getElementById('error-file')
-    //const errorPic = document.getElementById('error-pic')
+    const errorPic = document.getElementById('error-pic')
 
 
     document.getElementById('pic').addEventListener('change', function(event) {
@@ -72,8 +72,12 @@ document.addEventListener('DOMContentLoaded', function() {
             errorFile.innerHTML = 'Blueprint file size is limited to 1MB.'
         }
 
+        if (picFile && picFile.type !== 'image/png' && picFile.type !== 'image/jpeg') {
+            errorPic.innerHTML = 'Preview image must be a PNG or JPEG file.'
+        }
+
         // output return if at least one error is present
-        if (errorTitle.innerHTML || errorDesc.innerHTML || errorFile.innerHTML) {
+        if (errorTitle.innerHTML || errorDesc.innerHTML || errorFile.innerHTML || errorPic.innerHTML) {
             return
         }
 
@@ -97,10 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
+                if (data.error) {
+                    throw new Error(data.error)
+                }
                 window.location.replace(`print.php?id=${data.id}`)
             })
             .catch(error => {
-                new Error('content', error.message)
+                new OutputError('content', error.message)
             })
         }
         reader.readAsText(xmlFile)

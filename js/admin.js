@@ -1,10 +1,14 @@
 import Modal from './modal.js';
-import Error from './error.js';
+import OutputError from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     fetch(`admin.php?&ajax=1`)
     .then(response => response.json())
     .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
         const users = data;
         const table = document.getElementById('user-table');
         users.forEach(user => {
@@ -137,6 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     })
     .catch(error => {
-        new Error('content', error.message)
+        new OutputError('content', error.message)
     });
 });

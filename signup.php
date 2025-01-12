@@ -88,17 +88,18 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico">
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="components/loader/loader.css">
-    <script type="module" src="js/signup.js" defer></script>
-    <script type="module" src="js/universal.js" defer></script>
+    <script type="module" src="js/signup.js"></script>
+    <script type="module" src="js/universal.js"></script>
     <title>Sign up - RimPrints</title>
 </head>
 <body>
     <nav class="nav">
-        <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
+        <a href="index.php" class="nav-title">R i m P r i n t s</a>
+        <a href="index.php" class="nav-title-mobile">R</a>
         <div class="nav-links">
             <a href="signin.php">Sign in</a>
         </div>
@@ -114,7 +115,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
             </div>
             <div class="form-sec">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-input" autocomplete="one-time-code">
+                <input type="email" id="email" name="email" class="form-input" autocomplete="email">
                 <span id="error-email" class="error"></span>
             </div>
             <div class="form-sec">

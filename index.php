@@ -37,6 +37,11 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $totalPages = $result['totalPages'];
     $prints = $result['prints'];
 
+    if (empty($prints)) {
+        echo json_encode(['error' => '204']);
+        exit;
+    }
+
     $response = [
         'totalPages' => $totalPages,
         'prints' => []
@@ -67,20 +72,20 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico">
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/index.css">
     <script>
         let currentPage = '<?php echo $page; ?>';
     </script>
-    <script type="module" src="js/index.js" defer></script>
-    <script type="module" src="js/universal.js" defer></script>
+    <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/universal.js"></script>
     <title>RimPrints</title>
 </head>
 <body>
     <nav class="nav">
-        <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
-        <a href="index.php" class="nav-title-mobile"><h1>R</h1></a>
+        <a href="index.php" class="nav-title">R i m P r i n t s</a>
+        <a href="index.php" class="nav-title-mobile">R</a>
         <div class="nav-links">
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
                 <a href="admin.php">Administration</a>
@@ -106,9 +111,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         </div>
 
         <div class="pagination" id="pagination">
-            <button class="btn-sm" id="prev-btn" disabled><</button>
+            <button class="btn-sm" id="prev-btn" disabled>&lt;</button>
             <span id="page-number"></span>
-            <button class="btn-sm" id="next-btn">></button>
+            <button class="btn-sm" id="next-btn">&gt;</button>
         </div>
     </div>
     <div class="modal" id="modal-upload">

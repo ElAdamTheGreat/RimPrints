@@ -1,5 +1,5 @@
 import Modal from './modal.js';
-import Error from './error.js';
+import OutputError from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.error) {
             throw new Error(data.error);
         }
-
         // Set the title of the page to the print title
         function decodeHtmlEntities(str) {
             var txt = document.createElement('textarea');
@@ -107,6 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
         //console.log(data.createdAt)
     })
     .catch(error => {
-        new Error('content', error.message)
+        new OutputError('content', error.message)
     });
 });

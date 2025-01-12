@@ -87,22 +87,22 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico">
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/print.css">
     <link rel="stylesheet" href="components/loader/loader.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=keyboard_arrow_down" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=keyboard_arrow_down">
     <script>
         const printId = '<?php echo $printId; ?>';
     </script>
-    <script type="module" src="js/print.js" defer></script>
-    <script type="module" src="js/universal.js" defer></script>
+    <script type="module" src="js/print.js"></script>
+    <script type="module" src="js/universal.js"></script>
     <title>Loading print... - RimPrints</title>
 </head>
 <body>
-<nav class="nav">
-        <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
-        <a href="index.php" class="nav-title-mobile"><h1>R</h1></a>
+    <nav class="nav">
+        <a href="index.php" class="nav-title">R i m P r i n t s</a>
+        <a href="index.php" class="nav-title-mobile">R</a>
         <div class="nav-links">
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
                 <a href="admin.php">Administration</a>

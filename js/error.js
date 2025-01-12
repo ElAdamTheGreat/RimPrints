@@ -1,4 +1,4 @@
-class Error {
+class OutputError {
     constructor(Element, errorCode) {
         this.Element = document.getElementById(Element);
         this.errorCode = errorCode
@@ -10,6 +10,8 @@ class Error {
         let errDesc
         if (this.errorCode == '404') {
             errDesc = "Print not found."
+        } else if (this.errorCode == '204') {
+            errDesc = "No prints found."
         } else if (this.errorCode == '401') {
             errDesc = "User not authorized."
         } else if (this.errorCode == '422') {
@@ -22,4 +24,4 @@ class Error {
         console.error('Error: ', this.errorCode);
     }
 }
-export default Error;
+export default OutputError;

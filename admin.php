@@ -26,7 +26,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $users = getAllUsers();
 
     if (!$users) {
-        echo json_encode(['error' => '404']);
+        echo json_encode(['error' => '204']);
         exit;
     }
 
@@ -83,19 +83,19 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 3) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="lib/favicon.ico">
     <link rel="stylesheet" href="styles/universal.css">
     <link rel="stylesheet" href="styles/admin.css">
     <link rel="stylesheet" href="components/loader/loader.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <script type="module" src="js/admin.js" defer></script>
-    <script type="module" src="js/universal.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/universal.js"></script>
     <title>User administration - RimPrints</title>
 </head>
 <body>
 <nav class="nav">
-        <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
-        <a href="index.php" class="nav-title-mobile"><h1>R</h1></a>
+    <a href="index.php" class="nav-title">R i m P r i n t s</a>
+    <a href="index.php" class="nav-title-mobile">R</a>
         <div class="nav-links">
             <?php if ($_SESSION['role'] === 'admin') { ?>
                 <a href="admin.php">Administration</a>
