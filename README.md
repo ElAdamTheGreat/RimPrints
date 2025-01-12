@@ -34,7 +34,7 @@ Dobrá otázka. Je to z důvodu, že vytvářím stránku pro hráče jedné ur�
 - ~~xss a sql injection~~
 - ~~How to import blueprint~~
 - ~~responsivity~~
-- no prints message
+- ~~no prints message~~
 - documentation
 ## ToDo Extra
 - Account details

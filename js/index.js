@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`index.php?page=${currentPage}&ajax=1`)
     .then(response => response.json())
     .then(data => {
+        if (data === null) {
+            dataElement.innerHTML = 'No prints found.';
+            return;
+        }
+
         const totalPages = data.totalPages;
         const prints = data.prints;
         const currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
