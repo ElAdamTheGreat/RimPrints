@@ -201,3 +201,45 @@ function getUserByUsermail($username = null, $email = null): UserModel|null {
     return null;
 }
 
+function getAllUsers(): array {
+    global $pdo;
+    $query = $pdo->query('SELECT u.id, u.username, u.email, u.role, COUNT(p.id) AS prints FROM "rimprints_User" u LEFT JOIN "rimprints_Print" p ON u.id = p."userId" GROUP BY u.id, u.username, u.email, u.role ORDER BY u.username ASC;');
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $users = [];
+    foreach ($results as $row) {
+        $users[] = new UserModel($row['id'], $row['username'], $row['email'], $row['role'], $row['prints']);
+    }
+    return $users;
+}
+
+function deleteUser(int $id): bool {
+    global $pdo;
+    try {
+        // Begin transaction
+        $pdo->beginTransaction();
+
+        // Delete prints associated with the user
+        $deletePrintsQuery = $pdo->prepare('DELETE FROM "rimprints_Print" WHERE "userId" = :id;');
+        $deletePrintsQuery->execute(['id' => $id]);
+
+        // Delete the user
+        $deleteUserQuery = $pdo->prepare('DELETE FROM "rimprints_User" WHERE id = :id;');
+        $deleteUserSuccess = $deleteUserQuery->execute(['id' => $id]);
+
+        // Commit transaction
+        $pdo->commit();
+
+        return $deleteUserSuccess;
+    } catch (Exception $e) {
+        // Rollback transaction in case of error
+        $pdo->rollBack();
+        return false;
+    }
+}
+
+function changeUserRole(int $id, string $role): bool {
+    global $pdo;
+    $query = $pdo->prepare('UPDATE "rimprints_User" SET role = :role WHERE id = :id;');
+    return $query->execute(['role' => $role, 'id' => $id]);
+}

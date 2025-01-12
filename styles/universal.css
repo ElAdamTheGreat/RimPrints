@@ -24,6 +24,13 @@ body {
     z-index: 10;
 }
 .nav-title {
+    display: none;
+    font-family: 'RimWorldFont';
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.1rem;
+}
+.nav-title-mobile {
     font-family: 'RimWorldFont';
     text-decoration: none;
     color: inherit;
@@ -83,7 +90,10 @@ body {
 
 
 .btn-sm {
-    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
     padding: 8px 12px;
     color: white;
     background-color: #6A512E;
@@ -293,7 +303,10 @@ body {
         padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     }
     .nav-title {
-        font-size: 1.1rem;
+        display: block;
+    }
+    .nav-title-mobile {
+        display: none;
     }
 
     .modal-content {
@@ -319,6 +332,9 @@ body {
         font-size: 1rem;
         padding: 8px 56px;
         color: white;
+    }
+    .btn-sm {
+        font-size: 1rem;
     }
 
     .btn-red {

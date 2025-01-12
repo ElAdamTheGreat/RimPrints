@@ -55,7 +55,11 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
 <body>
     <nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
+        <a href="index.php" class="nav-title-mobile"><h1>R</h1></a>
         <div class="nav-links">
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+                <a href="admin.php">Administration</a>
+            <?php endif; ?>
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
                 <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>

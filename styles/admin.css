@@ -1,0 +1,165 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+thead tr {
+    border-bottom: 2px solid white;
+}
+
+#table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#table td, #table th {
+    border-bottom: 1px solid #ddd;
+}
+
+#table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: white;
+}
+
+#table td:nth-child(5),
+#table th:nth-child(5) {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (min-width: 0px) {
+    .content {
+        padding: 5rem 1.5rem 2rem 1.5rem;
+        gap: 0;
+    }
+    #table td:nth-child(2),
+    #table th:nth-child(2),
+    #table td:nth-child(3),
+    #table th:nth-child(3),
+    #table td:nth-child(4),
+    #table th:nth-child(4) {
+        display: none;
+    }
+    #table td, #table th {
+        padding: 8px 4px;
+    }
+
+    #table td {
+        font-size: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .demote-btn {
+        display: none;
+    }
+    .demote-btn-mobile {
+        display: flex;
+    }
+    .promote-btn {
+        display: none;
+    }
+    .promote-btn-mobile {
+        display: flex;
+    }
+    .delete-btn {
+        display: none;
+    }
+    .delete-btn-mobile {
+        display: flex;
+    }
+}
+
+@media (min-width: 640px) {
+    .content {
+        padding: 7rem 6rem 2rem 6rem;
+    }
+    #table td:nth-child(4),
+    #table th:nth-child(4) {
+        display: table-cell;
+    }
+    #table td, #table th {
+        padding: 8px;
+    }
+
+    #table td {
+        font-size: 1rem;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .demote-btn {
+        display: flex;
+    }
+    .demote-btn-mobile {
+        display: none;
+    }
+    .promote-btn {
+        display: flex;
+    }
+    .promote-btn-mobile {
+        display: none;
+    }
+    .delete-btn {
+        display: flex;
+    }
+    .delete-btn-mobile {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        padding: 7rem 10rem 3rem 10rem;
+    }
+    #table td:nth-child(3),
+    #table th:nth-child(3) {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 1024px) {
+    .content {
+        padding: 7rem 5rem 3rem 5rem;
+        gap: 2rem;
+    }
+    #table td:nth-child(2),
+    #table th:nth-child(2) {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 1280px) {
+    .content {
+        padding: 7rem 10rem 3rem 10rem;
+    }
+}
+
+@media (min-width: 1536px) {
+    .content {
+        padding: 7rem 20rem 3rem 20rem;
+    }
+}
+
+@media print {
+    .content {
+        padding: 2rem;
+    }
+    h1, h2, h3, h4, h5, h6, p, label, button, a {
+        color: black;
+    }
+}

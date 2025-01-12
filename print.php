@@ -42,6 +42,11 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
 if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     $result = deletePrint($printId);
     if ($result === true) {
+        // also delete picture, if it exists
+        $imgPath = getImagePath($printId);
+        if ($imgPath !== 'lib/img/placeholder.png') {
+            unlink($imgPath);
+        }
         echo json_encode(['success' => true]);
     } else {
         echo json_encode(['success' => false]);
@@ -71,7 +76,11 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
 <body>
 <nav class="nav">
         <a href="index.php" class="nav-title"><h1>R i m P r i n t s</h1></a>
+        <a href="index.php" class="nav-title-mobile"><h1>R</h1></a>
         <div class="nav-links">
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+                <a href="admin.php">Administration</a>
+            <?php endif; ?>
             <?php if (($_SESSION['isSignedIn'] ?? false) === true ) { ?>
                 <button class="link-button" id="signout-btn">Sign out</button>
             <?php } else { ?>

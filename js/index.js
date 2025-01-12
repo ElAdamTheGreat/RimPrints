@@ -1,4 +1,5 @@
 import Modal from './modal.js';
+import Error from './error.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const dataElement = document.getElementById('data')
@@ -55,9 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
         setupPagination(currentPage, totalPages);
     })
     .catch(error => {
-        console.error('Error fetching data:', error);
-        dataElement.innerHTML = '<p>Something went wrong. Please try again later.</p>';
-    });
+        new Error('data', error.message)
+    })
 });
 
 function setupPagination(currentPage, totalPages) {
