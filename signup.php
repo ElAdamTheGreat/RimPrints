@@ -1,6 +1,15 @@
 <?php
+/**
+ * This file handles the sign-up process.
+ * It manages AJAX requests for user registration and session management.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
-// is user not signed in?
+/**
+ * Check if the user is already signed in
+ */ 
 if (($_SESSION['isSignedIn'] ?? false)) {
     header('Location: index.php');
     exit;
@@ -8,6 +17,9 @@ if (($_SESSION['isSignedIn'] ?? false)) {
 
 include('server/queries.php');
 
+/**
+ * Handle AJAX request to check if username is taken
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $username = $_POST['username'] ?? '';
 
@@ -30,12 +42,17 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     }
 }
 
+/**
+ * Handle AJAX request to create a new user
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     $username = $_POST['username'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // validate data (server side)
+    /**
+     * Validate data (server side)
+     */
     if (strlen($username) < 4 || strlen($username) > 16 || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 4) {
         header('Content-Type: application/json');
         echo json_encode(['error' => 'Invalid data']);
@@ -45,7 +62,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
     $userId = createUser($username, $email, $hashedPass, 'user');
     
-    // fill session data
+    /**
+     * Fill session data
+     */
     if ($userId > 0) {
         $_SESSION['isSignedIn'] = true;
         $_SESSION['userId'] = $userId;
@@ -55,7 +74,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
         $_SESSION['prints'] = 0;
     }
 
-    // send data back to client
+    /**
+     * Send data back to client
+     */
     header('Content-Type: application/json');
     echo json_encode(['id' => $userId]);
     exit;

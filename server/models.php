@@ -1,4 +1,15 @@
 <?php
+/**
+ * This file is the models file. It is used to store the models for the database tables.
+ * @author Adam Gombos
+ */
+
+/**
+ * The UserModel class represents a user in the database.
+ * The MiniUserModel class represents a user in a smaller form.
+ * The PrintModel class represents a print in the database.
+ * The MiniPrintModel class represents a print in a smaller form.
+ */
 class UserModel {
     public $id;
     public $username;

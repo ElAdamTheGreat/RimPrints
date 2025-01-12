@@ -1,4 +1,13 @@
 <?php
+/**
+ * This file is the getImagePath function. It is used to get the path of an image based on its ID. If the image is not found, it returns a placeholder image.
+ * @author Adam Gombos
+ */
+
+/**
+ * @param int $id The ID of the image.
+ * @return string The path of the image.
+ */
 function getImagePath($id) {
     $directory = __DIR__ . '/../lib/img/';
     $extensions = ['jpg', 'png', 'jpeg'];

@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file is the queries file. It is used to store the queries for the database.
+ * @author Adam Gombos
+ */
 
 $config = include('config.php');
 include('models.php');
@@ -14,7 +18,10 @@ $pdo = new PDO($dsn, $user, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-// GET queries for prints
+/**
+ * @param int $page The current page number.
+ * @return array An array containing the prints and the total number of pages.
+ */
 function getAll(int $page): array {
     global $pdo;
 
@@ -63,7 +70,10 @@ function getAll(int $page): array {
 }
 
 
-
+/**
+ * @param mixed $id The ID of the print.
+ * @return PrintModel|null The print model if found, otherwise null. The print model also contains the MiniUsermodel.
+ */
 function getPrintById($id): PrintModel|null {
     global $pdo;
     $query = $pdo->prepare('SELECT p.*, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id WHERE p.id = :id;');
@@ -77,21 +87,13 @@ function getPrintById($id): PrintModel|null {
     return null;
 }
 
-function getPrintsByUserId($userId): array {
-    global $pdo;
-    $query = $pdo->prepare('SELECT p.*, u.id as user_id, u.username as user_username FROM "rimprints_Print" p JOIN "rimprints_User" u ON p."userId" = u.id WHERE p."userId" = :userId;');
-    $query->execute(['userId' => $userId]);
-    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    $prints = [];
-    foreach ($results as $row) {
-        $user = new MiniUserModel($row['user_id'], $row['user_username']);
-        $prints[] = new PrintModel($row['id'], $row['title'], $row['desc'], $row['content'], $row['createdAt'], $row['updatedAt'], $user);
-    }
-    return $prints;
-}
-
-// CREATE, UPDATE, DELETE queries for prints
+/**
+ * @param string $title The title of the print. Up to 32 characters.
+ * @param string $desc The description of the print. Up to 512 characters.
+ * @param string $content The content of the print. Up to 1MB.
+ * @param int $user_id The ID of the user.
+ * @return int The ID of the newly created print.
+ */
 function createPrint(string $title, string $desc, string $content, int $user_id): int {
     global $pdo;
     $query = $pdo->prepare('INSERT INTO "rimprints_Print" (title, "desc", content, "userId", "createdAt", "updatedAt") VALUES (:title, :desc, :content, :user_id, NOW(), NOW());');
@@ -99,12 +101,23 @@ function createPrint(string $title, string $desc, string $content, int $user_id)
     return (int)$pdo->lastInsertId();
 }
 
+/**
+ * @param int $id The ID of the print.
+ * @param string $title The title of the print. Up to 32 characters.
+ * @param string $desc The description of the print. Up to 512 characters.
+ * @param string $content The content of the print. Up to 1MB.
+ * @return void
+ */
 function updatePrint($id, $title, $desc, $content): void {
     global $pdo;
     $query = $pdo->prepare('UPDATE "rimprints_Print" SET title = :title, "desc" = :desc, content = :content, "updatedAt" = NOW() WHERE id = :id;');
     $query->execute(['id' => $id, 'title' => $title, 'desc' => $desc, 'content' => $content]);
 }
 
+/**
+ * @param int $id The ID of the print.
+ * @return bool True if the print was deleted, otherwise false.
+ */
 function deletePrint(int $id): bool {
     global $pdo;
     $query = $pdo->prepare('DELETE FROM "rimprints_Print" WHERE id = :id;');
@@ -113,7 +126,13 @@ function deletePrint(int $id): bool {
 }
 
 
-// USER queries
+/**
+ * @param string $username The username of the user.
+ * @param string $email The email of the user.
+ * @param string $password The password of the user.
+ * @param string $role The role of the user. Can be 'user' or 'admin'.
+ * @return int The ID of the newly created user, or 0 if the username or email already exists, or -1 if the user could not be created.
+ */
 function createUser($username, $email, $password, $role): int {
     global $pdo;
 
@@ -138,7 +157,11 @@ function createUser($username, $email, $password, $role): int {
         return -1;
     }
 }
-// Does user with this username exist?
+
+/**
+ * @param string $username The username of the user.
+ * @return bool True if the username is taken, otherwise false.
+ */
 function isUsernameTaken(string $username): bool {
     global $pdo;
     $query = $pdo->prepare('SELECT COUNT(*) FROM "rimprints_User" WHERE username = :username;');
@@ -147,6 +170,10 @@ function isUsernameTaken(string $username): bool {
     return (bool)$result;
 }
 
+/**
+ * @param string $email The email of the user.
+ * @return bool True if the email is taken, otherwise false.
+ */
 function checkUserPass($username = null, $email = null): string|null  {
     global $pdo;
     $conditions = [];
@@ -172,6 +199,11 @@ function checkUserPass($username = null, $email = null): string|null  {
     return $result ? $result['password'] : null;
 }
 
+/**
+ * @param string $username The username of the user.
+ * @param string $email The email of the user.
+ * @return UserModel|null The user model if found, otherwise null.
+ */
 function getUserByUsermail($username = null, $email = null): UserModel|null {
     global $pdo;
     $conditions = [];
@@ -201,6 +233,10 @@ function getUserByUsermail($username = null, $email = null): UserModel|null {
     return null;
 }
 
+/**
+ * @param int $id The ID of the user.
+ * @return UserModel|null The user model if found, otherwise null.
+ */
 function getAllUsers(): array {
     global $pdo;
     $query = $pdo->query('SELECT u.id, u.username, u.email, u.role, COUNT(p.id) AS prints FROM "rimprints_User" u LEFT JOIN "rimprints_Print" p ON u.id = p."userId" GROUP BY u.id, u.username, u.email, u.role ORDER BY u.username ASC;');
@@ -213,6 +249,10 @@ function getAllUsers(): array {
     return $users;
 }
 
+/**
+ * @param int $id The ID of the user.
+ * @return bool True if the user was deleted, otherwise false.
+ */
 function deleteUser(int $id): bool {
     global $pdo;
     try {
@@ -238,6 +278,11 @@ function deleteUser(int $id): bool {
     }
 }
 
+/**
+ * @param int $id The ID of the user.
+ * @param string $role The role of the user. Can be 'user' or 'admin'.
+ * @return bool True if the user role was changed, otherwise false.
+ */
 function changeUserRole(int $id, string $role): bool {
     global $pdo;
     $query = $pdo->prepare('UPDATE "rimprints_User" SET role = :role WHERE id = :id;');

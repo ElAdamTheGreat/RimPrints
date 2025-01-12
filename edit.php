@@ -1,5 +1,16 @@
 <?php
+/**
+ * This file is the edit blueprint page. It is used to edit a blueprint. 
+ * Handles AJAX requests for fetching and updating blueprint details.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
+
+/**
+ * Get the print ID from the query string and validate it
+ */
 $printId = $_GET['id'] ?? null;
 if ($printId === null || !is_numeric($printId)) {
     header('Location: index.php');
@@ -10,7 +21,13 @@ include('server/queries.php');
 include('components/loader/loader.php');
 include('functions/getImagePath.php');
 
+/**
+ * Handle AJAX requests
+ */
 if (isset($_GET['ajax'])) {
+    /**
+     * Fetch blueprint details
+     */
     if ($_GET['ajax'] == 1) {
         $print = getPrintById($printId);
         $imagePath = getImagePath($printId);
@@ -20,6 +37,9 @@ if (isset($_GET['ajax'])) {
             exit;
         }
         
+        /**
+         * Check if the user is signed in and authorized to edit the blueprint
+         */
         if (!($_SESSION['isSignedIn'] ?? false) || ($print->user->id !== $_SESSION['userId'] && $_SESSION['role'] !== 'admin')) {
             echo json_encode(['error' => '401']);
             exit;
@@ -37,13 +57,18 @@ if (isset($_GET['ajax'])) {
         exit;
     }
 
+    /**
+     * Update blueprint details
+     */
     if ($_GET['ajax'] == 2) {
         $title = $_POST['title'];
         $desc = $_POST['desc'];
         $xmlContent = $_POST['xmlContent'];
         $img = $_FILES['pic']['name'] ?? 'not-provided';
 
-        // validate data
+        /**
+         * Validate data
+         */
         if (strlen($title) > 32 || strlen($desc) > 512 || strlen($xmlContent) > 1048576) {
             echo json_encode(['error' => '422']);
             exit;
@@ -56,7 +81,9 @@ if (isset($_GET['ajax'])) {
         if ($img === 'not-provided') {
             exit;
         }
-        // REPLACE the image file
+        /**
+         * Replace the image file
+         */
         $imgPath = getImagePath($printId);
         if ($imgPath !== 'lib/img/placeholder.png') {
             unlink($imgPath);

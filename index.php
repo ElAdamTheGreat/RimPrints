@@ -1,5 +1,16 @@
 <?php
+/**
+ * This file is the main page. It is used to display the list of blueprints.
+ * Handles AJAX requests for fetching blueprint details.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
+
+/**
+ * Get the current page number from the query string and validate it
+ */
 $page = $_GET['page'] ?? 1;
 if (!is_numeric($page) || $page < 1) {
     $page = 1;
@@ -9,9 +20,15 @@ include('server/queries.php');
 include('components/loader/loader.php');
 include('functions/getImagePath.php');
 
+/**
+ * Handle AJAX request to fetch all blueprints
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $result = getAll($page);
     
+    /**
+     * Check if the blueprints exist
+     */
     if (!$result) {
         echo json_encode(['error' => '404']);
         exit;
@@ -35,6 +52,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         ];
     }
 
+    /**
+     * Send the response back to the client
+     */
     header('Content-Type: application/json');
     echo json_encode($response);
     exit;

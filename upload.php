@@ -1,6 +1,15 @@
 <?php
+/**
+ * This file handles the upload process for blueprints.
+ * It manages AJAX requests for uploading blueprint details and images.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
-// is user not signed in?
+/**
+ * Check if the user is signed in
+ */ 
 if (!($_SESSION['isSignedIn'] ?? false)) {
     header('Location: index.php');
     exit;
@@ -9,6 +18,9 @@ if (!($_SESSION['isSignedIn'] ?? false)) {
 include('server/queries.php');
 include('components/loader/loader.php');
 
+/**
+ * Handle AJAX request to upload a new blueprint
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $title = $_POST['title'];
     $desc = $_POST['desc'];
@@ -16,7 +28,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $img = $_FILES['pic']['name'] ?? 'not-provided';
     $userId = $_SESSION['userId'] ?? 1;
 
-    // validate data
+    /**
+     * Validate data
+     */
     if ((strlen($title) > 32 || strlen($title) < 1) || strlen($desc) > 512 || strlen($xmlContent) > 1048576) {
         echo json_encode(['error' => '422']);
         exit;
@@ -29,7 +43,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     // Increase the prints counter
     $_SESSION['prints'] = $_SESSION['prints'] + 1;
 
-    // Save the image file
+    /**
+     * Save the image file
+     */
     if ($img === 'not-provided') {
         exit;
     }

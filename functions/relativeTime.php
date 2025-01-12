@@ -1,4 +1,13 @@
-<?php   
+<?php
+/**
+ * This file is the relativeTime function. It is used to get the relative time of a date string compared to the current date.
+ * @author Adam Gombos
+ */
+
+/**
+ * @param string $dateString The date string to compare to the current date.
+ * @return string The relative time of the date string compared to the current date. For example: "4 days ago".
+ */
 function relativeTime(string $dateString): string {
     $currentDate = new DateTime();
     $date = new DateTime($dateString);

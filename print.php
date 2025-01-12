@@ -1,7 +1,17 @@
 <?php
+/**
+ * This file is used to display and manage a specific blueprint.
+ * Handles AJAX requests for fetching and deleting blueprint details.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
 $printId = $_GET['id'] ?? null;
 
+/**
+ * Validate the print ID
+ */
 if ($printId === null || !is_numeric($printId)) {
     header('Location: index.php');
     exit;
@@ -12,17 +22,30 @@ include('components/loader/loader.php');
 include('functions/relativeTime.php');
 include('functions/getImagePath.php');
 
+/**
+ * Handle AJAX request to fetch blueprint details
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $print = getPrintById($printId);
     $imagePath = getImagePath($printId);
 
+    /**
+     * Check if the blueprint and image exist
+     */
     if (!$print || !$imagePath) {
         echo json_encode(['error' => '404']);
         exit;
     }
 
+    /**
+     * Create relative time strings for created and updated at timestamps
+     */
     $relCreatedAt = relativeTime($print->createdAt);
     $relUpdatedAt = relativeTime($print->updatedAt);
+
+    /**
+     * Check if the user is signed in and authorized to edit/delete the blueprint
+     */
     $printActions = isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'] === true && ($print->user->id === $_SESSION['userId'] || $_SESSION['role'] === 'admin');
     header('Content-Type: application/json');
     echo json_encode([
@@ -31,7 +54,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         'content' => $print->content,
         'img' => htmlspecialchars($imagePath),
         'relCreatedAt' => $relCreatedAt,
-        //'createdAt' => $print->createdAt,
         'relUpdatedAt' => $relUpdatedAt,
         'username' => htmlspecialchars($print->user->username),
         'showActions' => $printActions,
@@ -39,10 +61,15 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     exit;
 }
 
+/**
+ * Handle AJAX request to delete a blueprint
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     $result = deletePrint($printId);
     if ($result === true) {
-        // also delete picture, if it exists
+        /**
+         * Also delete picture, if it exists
+         */
         $imgPath = getImagePath($printId);
         if ($imgPath !== 'lib/img/placeholder.png') {
             unlink($imgPath);
@@ -53,7 +80,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     }
     exit;
 }
-
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,16 @@
 <?php
+/**
+ * This file is the admin page. It is used to display the user administration page for the admin user.
+ * It handles various AJAX requests for user management such as fetching all users, deleting a user, and changing a user's role.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
+
+/**
+ * Check if the user is signed in and is an admin
+ */
 if (!($_SESSION['isSignedIn'] ?? false) || $_SESSION['role'] !== 'admin') {
     header('Location: index.php');
     exit;
@@ -8,6 +19,9 @@ if (!($_SESSION['isSignedIn'] ?? false) || $_SESSION['role'] !== 'admin') {
 include('server/queries.php');
 include('components/loader/loader.php');
 
+/**
+ * Handle AJAX request to fetch all users
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $users = getAllUsers();
 
@@ -16,6 +30,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         exit;
     }
 
+    $response = [];
     foreach ($users as $user) {
         $response[] = [
             'userId' => $user->id,
@@ -31,6 +46,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     exit;
 }
 
+/**
+ * Handle AJAX request to delete a user
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     $userId = $_POST['userId'];
 
@@ -43,6 +61,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 2) {
     exit;
 }
 
+/**
+ * Handle AJAX request to change a user's role
+ */
 if (isset($_GET['ajax']) && $_GET['ajax'] == 3) {
     $userId = $_POST['userId'];
     $role = $_POST['role'];
@@ -55,7 +76,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 3) {
     }
     exit;
 }
-
 ?>
 
 <!DOCTYPE html>

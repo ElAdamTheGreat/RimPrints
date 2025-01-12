@@ -1,4 +1,11 @@
 <?php
+/**
+ * This file handles the sign-out process.
+ * It clears the user session and redirects to the previous page or the main page.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
 
 if (isset($_SESSION['isSignedIn'])) {
@@ -7,3 +14,4 @@ if (isset($_SESSION['isSignedIn'])) {
     header('Location: ' . $redirectUrl);
     exit;
 }
+?>

@@ -1,4 +1,11 @@
 <?php
+/**
+ * This file handles the sign-in process.
+ * It manages AJAX requests for user authentication and session management.
+ * 
+ * @author Adam Gombos
+ */
+
 session_start();
 if (($_SESSION['isSignedIn'] ?? false)) {
     header('Location: index.php');
@@ -8,11 +15,16 @@ if (($_SESSION['isSignedIn'] ?? false)) {
 include('server/queries.php');
 include('components/loader/loader.php');
 
-// Enable error reporting for debugging
+/**
+ * Enable error reporting for debugging
+ */
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+/**
+ * Handle AJAX requests
+ */
 if (isset($_GET['ajax'])) {
     $ajaxType = $_GET['ajax'];
     $usermail = $_POST['usermail'] ?? '';
@@ -20,18 +32,28 @@ if (isset($_GET['ajax'])) {
     $email = null;
     $username = null;
 
+    /**
+     * Handle login request
+     */
     if ($ajaxType == 1) {
         $password = $_POST['password'] ?? '';
 
-        if (strlen($password) < 4) { // === max character limit in db?
+        /**
+         * Validate password length
+         */
+        if (strlen($password) < 4) {
             echo json_encode(['success' => false, 'error' => 'Please enter a password with valid length.']);
             exit;
         }
 
-        // in case of login, it must be recognised if user typed email or username
+        /**
+         * Determine if usermail is an email or username
+         */
         if (strpos($usermail, '@') !== false) {
             $email = $usermail;
-            // serverside validation
+            /**
+             * Server-side validation for email
+             */
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo json_encode(['success' => false, 'error' => 'Please enter a valid email address.']);
                 exit;
@@ -54,9 +76,9 @@ if (isset($_GET['ajax'])) {
             echo json_encode(['success' => false, 'error' => 'Incorrect password.']);
         }
     } elseif ($ajaxType == 2) {
-
-        // in case of login, it must be recognised if user typed email or username
-        // Handle second AJAX request
+        /**
+         * Handle second AJAX request
+         */
         if (strpos($usermail, '@') !== false) {
             $email = $usermail;
             $userDetails = getUserByUsermail(email: $email);
@@ -66,14 +88,18 @@ if (isset($_GET['ajax'])) {
         }
 
         if ($userDetails) {
-            // Extract user details
+            /**
+             * Extract user details
+             */
             $userId = $userDetails->id;
             $username = $userDetails->username;
             $email = $userDetails->email;
             $role = $userDetails->role;
             $prints = $userDetails->prints;
 
-            // fill user details to session
+            /**
+             * Fill user details to session
+             */
             $_SESSION['isSignedIn'] = true;
             $_SESSION['userId'] = $userId;
             $_SESSION['username'] = $username;
@@ -81,7 +107,9 @@ if (isset($_GET['ajax'])) {
             $_SESSION['role'] = $role;
             $_SESSION['prints'] = $prints;
 
-            // send data back to client
+            /**
+             * Send data back to client
+             */
             echo json_encode([
                 'success' => true,
                 'user' => [
