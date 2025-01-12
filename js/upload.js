@@ -10,22 +10,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const titleElement = document.getElementById('title')
     const descElement = document.getElementById('desc')
     const fileElement = document.getElementById('file')
-    const submit = document.getElementById('submit')
-    const content = document.getElementById('content')
+    const picElement = document.getElementById('pic')
+
     const errorTitle = document.getElementById('error-title')
     const errorDesc = document.getElementById('error-desc')
     const errorFile = document.getElementById('error-file')
     const errorPic = document.getElementById('error-pic')
 
+    const submit = document.getElementById('submit')
+    const content = document.getElementById('content')
 
-    document.getElementById('pic').addEventListener('change', function(event) {
+    picElement.addEventListener('change', function(event) {
         const file = event.target.files[0]
-        if (file) {
+        if (file && (file.type === 'image/png' || file.type === 'image/jpeg')) {
             const reader = new FileReader()
             reader.onload = function(e) {
                 document.getElementById('preview').src = e.target.result
             }
             reader.readAsDataURL(file)
+        } else {
+            errorPic.innerHTML = 'Preview image must be a PNG or JPEG file.'
+            document.getElementById('pic').value = ''; // Clear the input
+        }
+    })
+
+    fileElement.addEventListener('change', function(event) {
+        const file = event.target.files[0]
+        if (file && file.type !== 'text/xml') {
+            errorFile.innerHTML = 'Blueprint file must be an XML file.'
+            document.getElementById('file').value = ''; // Clear the input
         }
     })
 

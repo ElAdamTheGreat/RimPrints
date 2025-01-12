@@ -37,6 +37,10 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $totalPages = $result['totalPages'];
     $prints = $result['prints'];
 
+    if ($page > $totalPages) {
+        echo json_encode(['error' => '404']);
+        exit;
+    }
     if (empty($prints)) {
         echo json_encode(['error' => '204']);
         exit;

@@ -9,9 +9,9 @@ class OutputError {
     displayError() {
         let errDesc
         if (this.errorCode == '404') {
-            errDesc = "Print not found."
+            errDesc = "Page not found."
         } else if (this.errorCode == '204') {
-            errDesc = "No prints found."
+            errDesc = "No content found."
         } else if (this.errorCode == '401') {
             errDesc = "User not authorized."
         } else if (this.errorCode == '422') {
